@@ -1,0 +1,476 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>mobiscroll实践：移动端仿苹果select效果的实现 | 向上爬的蜗牛</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="dhshen">
+    
+
+    
+    <meta name="description" content="最近在做一个微信服务号的开发，设计中日期选择和周期选择的输入框需要使用苹果的select下拉效果，在网上折腾了好久，最终的感慨就是这事基本上只有mobiscroll能搞定，然后专心死磕mobiscroll咯。 首先这个插件是需要收费的，官网提供15天的试用期，但是需要填写信用卡，随便编了几下结果没通过审核，只得作罢，在网上搜mobiscroll实践的博客，也是各种折腾各种坑。首先是大家用mobis">
+<meta name="keywords" content="mobiscroll">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mobiscroll实践：移动端仿苹果select效果的实现">
+<meta property="og:url" content="https://dhshen.github.io/2016/12/09/mobiscroll实践：移动端仿苹果select效果的实现/index.html">
+<meta property="og:site_name" content="向上爬的蜗牛">
+<meta property="og:description" content="最近在做一个微信服务号的开发，设计中日期选择和周期选择的输入框需要使用苹果的select下拉效果，在网上折腾了好久，最终的感慨就是这事基本上只有mobiscroll能搞定，然后专心死磕mobiscroll咯。 首先这个插件是需要收费的，官网提供15天的试用期，但是需要填写信用卡，随便编了几下结果没通过审核，只得作罢，在网上搜mobiscroll实践的博客，也是各种折腾各种坑。首先是大家用mobis">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20161209172123363?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWJsZDk5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161209174118965?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWJsZDk5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161209174321920?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWJsZDk5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-01-15T11:51:16.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mobiscroll实践：移动端仿苹果select效果的实现">
+<meta name="twitter:description" content="最近在做一个微信服务号的开发，设计中日期选择和周期选择的输入框需要使用苹果的select下拉效果，在网上折腾了好久，最终的感慨就是这事基本上只有mobiscroll能搞定，然后专心死磕mobiscroll咯。 首先这个插件是需要收费的，官网提供15天的试用期，但是需要填写信用卡，随便编了几下结果没通过审核，只得作罢，在网上搜mobiscroll实践的博客，也是各种折腾各种坑。首先是大家用mobis">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161209172123363?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWJsZDk5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+    
+    <link rel="alternative" href="/atom.xml" title="向上爬的蜗牛" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="向上爬的蜗牛">向上爬的蜗牛</a></h1>
+				<h2 class="blog-motto">记录搬砖路上的点点滴滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:dhshen.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/12/09/mobiscroll实践：移动端仿苹果select效果的实现/" title="mobiscroll实践：移动端仿苹果select效果的实现" itemprop="url">mobiscroll实践：移动端仿苹果select效果的实现</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="dhshen" target="_blank" itemprop="author">dhshen</a>
+		
+  <p class="article-time">
+    <time datetime="2016-12-09T09:18:29.000Z" itemprop="datePublished"> 发表于 2016-12-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>最近在做一个微信服务号的开发，设计中日期选择和周期选择的输入框需要使用苹果的select下拉效果，在网上折腾了好久，最终的感慨就是这事基本上只有mobiscroll能搞定，然后专心死磕mobiscroll咯。</p>
+<p>首先这个插件是需要收费的，官网提供15天的试用期，但是需要填写信用卡，随便编了几下结果没通过审核，只得作罢，在网上搜mobiscroll实践的博客，也是各种折腾各种坑。首先是大家用mobiscroll时都一定程度上的做了自己的封装，没有封装的就是一堆的js和css引用，一开始为了实现这个采用的方案里引入了将近十多个这个插件的js和css，而且还只是日期选择控件，还要做一个数字选择的控件我就无从下手了，于是又开始了从头的折腾，折腾久了发现mobiscroll还存在破解版，说到这，不得不佩服国内的破解事业啊。<br>发现有破解版后，便尝试了网上各个版本的破解版，最终采用的破解版的地址是：<a href="http://download.csdn.net/detail/wfrules/9567067" target="_blank" rel="noopener">mobiscroll3.0 最新完整破解版</a>，实现了如下的效果：</p>
+<p><img src="http://img.blog.csdn.net/20161209172123363?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWJsZDk5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="效果图"></p>
+<p><a href="https://dhshen.github.io/demo/mobiscroll/">在线查看效果</a><br><a href="https://github.com/dhshen/DEMO/tree/master/mobiscroll" target="_blank" rel="noopener">demo代码</a></p>
+<p>一开始接触mobiscroll可能对网上别人写的代码很不理解，但是只要在官网都花点功夫，使用起来还是很简单的，<a href="https://www.mobiscroll.com/" target="_blank" rel="noopener">mobiscroll的官网</a>文档特别的详细，当然了这个插件的功能也是特别的强大，我要用到的只是其中的一小部分而已。</p>
+<p>日期选择功能在官网中的参数说明页：<a href="https://docs.mobiscroll.com/3-0-0_beta6/javascript/datetime" target="_blank" rel="noopener">https://docs.mobiscroll.com/3-0-0_beta6/javascript/datetime</a></p>
+<p>数字选择功能在官网中的参数说明页：<a href="https://docs.mobiscroll.com/3-0-0_beta6/number" target="_blank" rel="noopener">https://docs.mobiscroll.com/3-0-0_beta6/number</a></p>
+<p>使用mobiscroll最好是先到官网的demo页去选择自己需要的功能，然后就可以看到使用该功能的代码，自己copy下来，再去具体的功能参数页面查看参数，最后根据自己的需要通过审查元素等方式修改样式。<br><img src="http://img.blog.csdn.net/20161209174118965?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWJsZDk5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="DEMO页"><br>DEMO页</p>
+<p><img src="http://img.blog.csdn.net/20161209174321920?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYWJsZDk5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="参数使用说明页"></p>
+<p>破解版就只有一个js和一个css文件了，因为具备了mobiscroll的所有功能，所以这两文件加起来有将近400kb。</p>
+<p>还是贴一下demo的代码吧：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0&quot;&gt;</span><br><span class="line">    &lt;title&gt;mobiscroll&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;./css/mobiscroll.custom-3.0.0-beta2.min.css&quot;&gt;</span><br><span class="line">    &lt;script src=&quot;./js/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;./js/mobiscroll.custom-3.0.0-beta2.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">        html,body&#123;height:100%&#125;</span><br><span class="line">        body&#123;margin:0;padding:10px;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased&#125;</span><br><span class="line">        button&#123;display:inline-block;text-decoration:none;padding:0.8em 2.6em;margin:20px 10px 0 0;outline:0;border:0;overflow:visible;cursor:pointer;color:#fff;background:#5185a8;font-family:Arial,sans-serif,verdana;font-size:14px;font-weight:100;-webkit-transition:background 0.3s ease-out;-moz-transition:background 0.3s ease-out;-o-transition:background 0.3s ease-out;transition:background 0.3s ease-out&#125;</span><br><span class="line">        button:hover&#123;background:#34566d&#125;</span><br><span class="line">        input&#123;width:100%;margin:0 0 10px 0;padding:10px;border:1px solid #ccc;border-radius:0;background:#fff;font-family:Arial,sans-serif,verdana;text-shadow:none;color:#000;font-size:15px;-webkit-appearance:none;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box&#125;</span><br><span class="line">        .demo-main-cont&#123;height:100%&#125;</span><br><span class="line">        .mbsc-sc-itm&#123;text-align:center !important&#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body class=&quot;demo-main-cont demo-comp-number demo-display-bottom demo-theme-mobiscroll&quot;&gt;</span><br><span class="line">    &lt;input id=&quot;date&quot; placeholder=&quot;Please Select ...&quot; /&gt;     &lt;!-- 选择日期 --&gt;</span><br><span class="line">    &lt;input id=&quot;integer&quot; placeholder=&quot;Please Select ...&quot; /&gt;  &lt;!-- 选择数字 --&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    $(function () &#123;</span><br><span class="line">        var now = new Date(),</span><br><span class="line">            min = new Date(now.getFullYear() - 4, now.getMonth(), now.getDate());</span><br><span class="line">            max = new Date(now.getFullYear() + 4, now.getMonth(), now.getDate());</span><br><span class="line">        var instance = mobiscroll.date(&apos;#date&apos;, &#123;</span><br><span class="line">            lang: &apos;zh&apos;,             //语言</span><br><span class="line">            display: &apos;bottom&apos;,      //在页面的什么位置显示</span><br><span class="line">            max: max,        //可供选择的最大日期</span><br><span class="line">            min: min,        //可供选择的最小日期</span><br><span class="line">            theme:&apos;ios&apos;,     //主题，插件的皮肤效果，此处选择ios，为了模仿ios的select效果</span><br><span class="line">            dateFormat:&apos;yy-mm-dd&apos;      //日期格式</span><br><span class="line">        &#125;);</span><br><span class="line">    </span><br><span class="line">        var instance2 = mobiscroll.number(&apos;#integer&apos;, &#123;</span><br><span class="line">            lang: &apos;zh&apos;,</span><br><span class="line">            display: &apos;bottom&apos;,</span><br><span class="line">            layout: &apos;fixed&apos;,</span><br><span class="line">            step: 1,        //前后数字差，可根据这个参数来设置2 4 6 8之类的数字选择</span><br><span class="line">            min: 1,         //最小数字</span><br><span class="line">            max: 50,        //最大数字</span><br><span class="line">            width: 100,     </span><br><span class="line">            defaultValue:28,    //刚显示出来时选择的数字</span><br><span class="line">            theme:&apos;ios&apos;      //主题</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;!-- 更多date与Integer选择参数请参见mobiscroll官网：</span><br><span class="line">   https://docs.mobiscroll.com/3-0-0_beta6/javascript/datetime</span><br><span class="line">   https://docs.mobiscroll.com/3-0-0_beta6/number</span><br><span class="line">--&gt;</span><br></pre></td></tr></table></figure></p>
+<p>为了实现这个效果花了一天多的时间，写这篇博客希望其他人少走弯路！</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/mobiscroll/">mobiscroll</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://dhshen.github.io/2016/12/09/mobiscroll实践：移动端仿苹果select效果的实现/" data-title="mobiscroll实践：移动端仿苹果select效果的实现 | 向上爬的蜗牛" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/03/28/H5中的pushState/" title="H5中的pushState">
+  <strong>上一篇：</strong><br/>
+  <span>
+  H5中的pushState</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/10/23/webpack入门实践/"  title="webpack入门实践">
+ <strong>下一篇：</strong><br/> 
+ <span>webpack入门实践
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/charles/" title="charles">charles<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/apache/" title="apache">apache<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/webpack/" title="webpack">webpack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/less/" title="less">less<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="dhshen">dhshen</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

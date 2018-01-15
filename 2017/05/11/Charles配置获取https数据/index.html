@@ -1,0 +1,523 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Charles配置获取https数据 | 向上爬的蜗牛</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="dhshen">
+    
+
+    
+    <meta name="description" content="本配置说明分为PC端和移动端。移动端的调试变化相对较大 PC端安装配置 Charles 根证书  保存Charles的Root Certificate，一个xxx.pem文件。  调出mac下的钥匙串访问  点击左侧的登录，然后把第一步中保存的xxx.pem文件拖到右侧中，此时的情况是：  系统默认是不信任 Charles 的证书的，此时对证书右键，在弹出的下拉菜单中选择『显示简介』，点击使用此证">
+<meta name="keywords" content="charles">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Charles配置获取https数据">
+<meta property="og:url" content="https://dhshen.github.io/2017/05/11/Charles配置获取https数据/index.html">
+<meta property="og:site_name" content="向上爬的蜗牛">
+<meta property="og:description" content="本配置说明分为PC端和移动端。移动端的调试变化相对较大 PC端安装配置 Charles 根证书  保存Charles的Root Certificate，一个xxx.pem文件。  调出mac下的钥匙串访问  点击左侧的登录，然后把第一步中保存的xxx.pem文件拖到右侧中，此时的情况是：  系统默认是不信任 Charles 的证书的，此时对证书右键，在弹出的下拉菜单中选择『显示简介』，点击使用此证">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgjj75g3j30ni08yacv.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNc79gy1ffhgbua5ccj30o2094n01.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1ffhggp0semj30oc0ffjsx.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgn3d4slj30oa0fdtcm.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgy1ffhgshfzxtj30e80c1tbg.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgtih3yqj30rh0ij0v8.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhgz3fi2jj306a0a475q.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1ffhh2dfb0oj30gf0c8dh3.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhhddrbj5j308y0ajdgq.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhhl8kb77j30ng08vq5r.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhhk4fv2kj30or07lwf7.jpg">
+<meta property="og:image" content="http://img.blog.csdn.net/20160612203310693">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNc79ly1ffhifp363kj30pw02st9a.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjeaj7hjj31kg0u97ee.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjgorg5nj30fw03aaah.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1ffhjq84wkej307k053t9r.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjrb0wyij31410l8gmm.jpg">
+<meta property="og:updated_time" content="2018-01-15T11:51:16.728Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Charles配置获取https数据">
+<meta name="twitter:description" content="本配置说明分为PC端和移动端。移动端的调试变化相对较大 PC端安装配置 Charles 根证书  保存Charles的Root Certificate，一个xxx.pem文件。  调出mac下的钥匙串访问  点击左侧的登录，然后把第一步中保存的xxx.pem文件拖到右侧中，此时的情况是：  系统默认是不信任 Charles 的证书的，此时对证书右键，在弹出的下拉菜单中选择『显示简介』，点击使用此证">
+<meta name="twitter:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgjj75g3j30ni08yacv.jpg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="向上爬的蜗牛" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="向上爬的蜗牛">向上爬的蜗牛</a></h1>
+				<h2 class="blog-motto">记录搬砖路上的点点滴滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:dhshen.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/05/11/Charles配置获取https数据/" title="Charles配置获取https数据" itemprop="url">Charles配置获取https数据</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="dhshen" target="_blank" itemprop="author">dhshen</a>
+		
+  <p class="article-time">
+    <time datetime="2017-05-11T03:19:56.000Z" itemprop="datePublished"> 发表于 2017-05-11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>本配置说明分为PC端和移动端。<br>移动端的调试变化相对较大</p>
+<h3 id="PC端"><a href="#PC端" class="headerlink" title="PC端"></a>PC端</h3><p>安装配置 Charles 根证书</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgjj75g3j30ni08yacv.jpg" alt=""></p>
+<p>保存Charles的Root Certificate，一个xxx.pem文件。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNc79gy1ffhgbua5ccj30o2094n01.jpg" alt=""></p>
+<p>调出mac下的钥匙串访问</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgy1ffhggp0semj30oc0ffjsx.jpg" alt=""></p>
+<p>点击左侧的登录，然后把第一步中保存的xxx.pem文件拖到右侧中，此时的情况是：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgn3d4slj30oa0fdtcm.jpg" alt=""></p>
+<p>系统默认是不信任 Charles 的证书的，此时对证书右键，在弹出的下拉菜单中选择『显示简介』，点击使用此证书时，把使用系统默认改为始终信任，如下图：</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgy1ffhgshfzxtj30e80c1tbg.jpg" alt=""></p>
+<p>最终：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgtih3yqj30rh0ij0v8.jpg" alt=""></p>
+<p>配置到这一步还不能抓取https，还要配置一下Charles的SSL设置</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhgz3fi2jj306a0a475q.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgy1ffhh2dfb0oj30gf0c8dh3.jpg" alt=""></p>
+<p>设置host为<code>*</code>就可以抓取所有的https站点的数据啦，当然你也可以选择一个一个添加，只抓取已经添加了的域名。</p>
+<p>现在我们就可以在Charles中抓到https的包咯。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhhddrbj5j308y0ajdgq.jpg" alt=""></p>
+<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhhl8kb77j30ng08vq5r.jpg" alt=""></p>
+<p>点击在移动设备上安装Root Certificate证书，会弹出下列提示：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhhk4fv2kj30or07lwf7.jpg" alt=""></p>
+<p>在手机浏览器中打开<code>charlesproxy.com/getssl</code>这个链接，会跳转到证书安装界面：</p>
+<p><img src="http://img.blog.csdn.net/20160612203310693" alt=""></p>
+<p>点击安装。</p>
+<p>然后就可以抓取移动端的https包了。</p>
+<p>关键的地方来了，经过上述操作之后我们可以抓取移动端Safari浏览器的https的包，因为我们已经在IOS内信任了Charles的证书，但是微信浏览器它似乎不是用的系统的信任体系，因此有了如下的错误提示：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNc79ly1ffhifp363kj30pw02st9a.jpg" alt=""></p>
+<p><code>unknown_ca</code>说明微信浏览器并不信任Charles的 Root Certificate。</p>
+<p>因为微信浏览器默认拒绝不安全的<em>https</em>，因此屏幕会直接提示网络出错。0……0</p>
+<p>微信端的手机调试应该会比较头疼了，在此推荐一下另外一种调试方式吧。</p>
+<h3 id="微信web开发者工具"><a href="#微信web开发者工具" class="headerlink" title="微信web开发者工具"></a>微信web开发者工具</h3><p><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html" target="_blank" rel="noopener">微信web开发者工具下载地址</a></p>
+<p>使用<strong>“微信web开发者工具”</strong>，可以像chrome devTool那样看每一个请求。</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjeaj7hjj31kg0u97ee.jpg" alt=""></p>
+<p>微信web开发者工具可以用来做公众号和小程序开发的调试，因此我们可以用它来调试公众号内页面。但是牵涉到与微信本身功能相关的地方（比如说获取openid）就需要是该公众号的开发者才行，否则会提示：</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjgorg5nj30fw03aaah.jpg" alt=""></p>
+<p>遇到这种问题时就需要登陆该微信公众号的后台，把开发者的微信添加为“开发者”。</p>
+<p>微信web开发者工具令人叫好的地方是，它有一个功能叫<strong>代理！！！</strong></p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNc79gy1ffhjq84wkej307k053t9r.jpg" alt=""></p>
+<p>进入微信web开发者工具的设置-&gt;代理</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjrb0wyij31410l8gmm.jpg" alt=""></p>
+<p><strong>如上设置并保存后，我们就可以像是在手机端调试一样，被charles抓到包了！！！</strong></p>
+<p><strong>如果没有设置代理，微信web开发者工具内的包是不会被charles抓到的！！！</strong></p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a href="http://blog.csdn.net/yangmeng13930719363/article/details/51645435" target="_blank" rel="noopener">使用 Charles 获取 https 的数据</a></p>
+<p>charles配置部分第4、5张以及移动端证书安装图片摘自<a href="http://blog.csdn.net/yangmeng13930719363/article/details/51645435" target="_blank" rel="noopener">使用 Charles 获取 https 的数据</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/charles/">charles</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://dhshen.github.io/2017/05/11/Charles配置获取https数据/" data-title="Charles配置获取https数据 | 向上爬的蜗牛" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/05/11/https配置与部署/" title="https配置与部署">
+  <strong>上一篇：</strong><br/>
+  <span>
+  https配置与部署</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/04/20/ant-design-mobile搭建/"  title="ant-design-mobile搭建">
+ <strong>下一篇：</strong><br/> 
+ <span>ant-design-mobile搭建
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/charles/" title="charles">charles<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/apache/" title="apache">apache<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/webpack/" title="webpack">webpack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/less/" title="less">less<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="dhshen">dhshen</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

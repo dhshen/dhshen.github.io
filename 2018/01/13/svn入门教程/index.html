@@ -1,0 +1,594 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>svn入门教程 | 向上爬的蜗牛</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="dhshen">
+    
+
+    
+    <meta name="description" content="毕业后的一个东家使用的就是svn，对svn的使用仅限于师兄手把手教的拉代码、添加代码、提交以及使用BeyondCompare工具比较代码等，而且是基于图形界面的操作。转眼已经过去两年，这两年一直用的git，而且一直以命令的方式使用git，感觉git用起来很顺手，但是最近换了工作，公司内部的一些项目还是用的svn，想起当初学习了廖雪峰老师的Git教程让我对Git有一个基本的了解与熟悉，能够熟练的使用">
+<meta name="keywords" content="svn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="svn入门教程">
+<meta property="og:url" content="https://dhshen.github.io/2018/01/13/svn入门教程/index.html">
+<meta property="og:site_name" content="向上爬的蜗牛">
+<meta property="og:description" content="毕业后的一个东家使用的就是svn，对svn的使用仅限于师兄手把手教的拉代码、添加代码、提交以及使用BeyondCompare工具比较代码等，而且是基于图形界面的操作。转眼已经过去两年，这两年一直用的git，而且一直以命令的方式使用git，感觉git用起来很顺手，但是最近换了工作，公司内部的一些项目还是用的svn，想起当初学习了廖雪峰老师的Git教程让我对Git有一个基本的了解与熟悉，能够熟练的使用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fng7bfs1pyj30fb09gweh.jpg">
+<meta property="og:updated_time" content="2018-01-15T11:51:16.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="svn入门教程">
+<meta name="twitter:description" content="毕业后的一个东家使用的就是svn，对svn的使用仅限于师兄手把手教的拉代码、添加代码、提交以及使用BeyondCompare工具比较代码等，而且是基于图形界面的操作。转眼已经过去两年，这两年一直用的git，而且一直以命令的方式使用git，感觉git用起来很顺手，但是最近换了工作，公司内部的一些项目还是用的svn，想起当初学习了廖雪峰老师的Git教程让我对Git有一个基本的了解与熟悉，能够熟练的使用">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fng7bfs1pyj30fb09gweh.jpg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="向上爬的蜗牛" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="向上爬的蜗牛">向上爬的蜗牛</a></h1>
+				<h2 class="blog-motto">记录搬砖路上的点点滴滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:dhshen.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/01/13/svn入门教程/" title="svn入门教程" itemprop="url">svn入门教程</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="dhshen" target="_blank" itemprop="author">dhshen</a>
+		
+  <p class="article-time">
+    <time datetime="2018-01-13T14:15:50.000Z" itemprop="datePublished"> 发表于 2018-01-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>毕业后的一个东家使用的就是svn，对svn的使用仅限于师兄手把手教的拉代码、添加代码、提交以及使用BeyondCompare工具比较代码等，而且是基于图形界面的操作。转眼已经过去两年，这两年一直用的git，而且一直以命令的方式使用git，感觉git用起来很顺手，但是最近换了工作，公司内部的一些项目还是用的svn，想起当初学习了廖雪峰老师的Git教程让我对Git有一个基本的了解与熟悉，能够熟练的使用命令行完成基本的操作，面对Git的时候不会再有距离感。因此也决定探索SVN，不想再简单的只会几个基本的操作。</p>
+<p>话说这两年接触一个东西的时候不像以前那样只想着能用会用，总是希望从头到尾的去过一遍心里才有底，才放心，大概是被面试逼出来的吧[捂脸]。</p>
+<h2 id="SVN的概念"><a href="#SVN的概念" class="headerlink" title="SVN的概念"></a>SVN的概念</h2><p>Subversion(SVN)是一个开源的版本控制系统。</p>
+<p>与Git不同之处之前的文章中也有提到过，这里还是再提一下，因为对理解来说还是挺重要的</p>
+<blockquote>
+<p>SVN是集中式版本控制系统，而Git则是分布式版本控制系统</p>
+<p>集中式版本控制系统，版本库是集中存放在中央服务器的，而干活的时候，用的都是自己的电脑，所以要先从中央服务器取得最新的版本，然后开始干活，干完活了，再把自己的活推送给中央服务器。中央服务器就好比是一个图书馆，你要改一本书，必须先从图书馆借出来，然后回到家自己改，改完了，再放回图书馆。</p>
+</blockquote>
+<p>集中式版本控制系统最大的毛病就是必须联网才能工作，如果在局域网内还好，带宽够大，速度够快，在互联网上的话可能就会遇到很大的网速问题。不过大部分使用SVN的公司都是在公司局域网内使用。</p>
+<h4 id="原理图"><a href="#原理图" class="headerlink" title="原理图"></a>原理图</h4><p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fng7bfs1pyj30fb09gweh.jpg" alt=""></p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>repository （源代码库）：源代码统一存放的地方</p>
+<p>checkout （提取）：当你手上没有源代码的时候，你需要从repository checkout一份</p>
+<p>commit （提交）：当你已经修改了代码，你就需要commit到repository</p>
+<p>update（更新）：当你已经checkout了一份源代码，update一下你就可以和Repository上的源代码同步，你手上的代码就会有新的变更。</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p><strong>创建版本库</strong></p>
+<p>版本库相当于一个集中的空间，用于存放开发者所有的工作成果。版本库不仅能存放文件，还包括了每次修改的历史，即每个文件的变动历史。</p>
+<p>create操作是用来创建一个新的版本库。</p>
+<p><strong>检出</strong></p>
+<p>checkout操作是用来从版本库创建一个工作副本。工作副本是开发者私人的工作空间，可以进行内容的修改，然后提交到版本库中。</p>
+<p><strong>更新</strong></p>
+<p>update操作是用来更新版本库的。这个操作将工作副本与版本库进行同步。</p>
+<p><strong>执行变更</strong></p>
+<p>当检出之后，你就可以做很多操作来执行变更。最常用的操作是编辑。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在centos服务器上安装svn：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install subversion</span><br></pre></td></tr></table></figure>
+<p>如果安装完了，可以通过查看svn版本确认一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn --version</span><br></pre></td></tr></table></figure>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><p>创建版本库目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /data/svn</span><br></pre></td></tr></table></figure>
+<p><strong>创建版本库</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnadmin create /data/svn/test</span><br></pre></td></tr></table></figure>
+<p><strong>启动服务</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnserve -d -r 目录 --listen-port 端口号</span><br></pre></td></tr></table></figure>
+<p><code>--listen-port</code>：指定端口号，默认为3690</p>
+<p>svn的启动可以有两种不同的访问方式：</p>
+<p>方式1：-r直接指定到版本库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnserve -d -r /data/svn/test --listen-port 3690</span><br></pre></td></tr></table></figure>
+<p>方式2：-r指定到版本库的上级目录(称之为多库svnserve方式)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svnserve -d -r /data/svn</span><br></pre></td></tr></table></figure>
+<p><strong>svn版本库权限配置</strong></p>
+<p>前面的步骤中我们启动了服务，但是并没有为test版本库配置任何的权限，如果此时直接访问的话并提交的话会出现如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svn: E170001: Commit failed (details follow):</span><br><span class="line">svn: E170001: 认证失败</span><br></pre></td></tr></table></figure>
+<p>我们首先需要配置的是<code>/test/conf</code>下的<code>svnserve.conf</code>文件，一般用默认就好了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[general]</span><br><span class="line">anon-access = none		# 不允许没有权限的用户访问，none：无访问权限</span><br><span class="line">auth-access = write		# 有权限用户访问版本库的权限，读写</span><br><span class="line">password-db = passwd	# 用户口令存放文件，默认为conf目录的passwd文件</span><br><span class="line">authz-db = authz		# 权限配置文件，默认为conf目录的authz</span><br></pre></td></tr></table></figure>
+<p>然后是配置用户口令，在passwd文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[users]</span><br><span class="line">admin = admin</span><br><span class="line">xiaoming = xiaoming</span><br></pre></td></tr></table></figure>
+<p>最后一步是权限配置文件，即<code>authz</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[groups]</span><br><span class="line">g_one = admin,xiaoming	# 设置组，该组包含两个用户</span><br><span class="line"></span><br><span class="line">[test:/]</span><br><span class="line">@g_one = rw</span><br><span class="line">* =						# *表示“除了上面提到的那些人之外的其余所有人”,禁止访问本目录</span><br></pre></td></tr></table></figure>
+<p>或直接设置用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[groups]</span><br><span class="line"></span><br><span class="line">[test:/]</span><br><span class="line">admin = rw</span><br><span class="line">* =</span><br></pre></td></tr></table></figure>
+<p><strong>关闭svn服务</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep svn</span><br></pre></td></tr></table></figure>
+<p>找到svn进程的PID后使用<code>kill</code>命令直接杀掉它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -s 9 PID</span><br></pre></td></tr></table></figure>
+<p><strong>检出</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svn checkout svn://svn.xspdwn.com/test --username=dhshen</span><br><span class="line">Checked out revision 0.</span><br></pre></td></tr></table></figure>
+<p>可以看到当前目录新增了一个test文件夹，其内部有一个隐藏的<code>.svn</code>的文件夹</p>
+<p>同时执行命令后shell会打印出当前的版本号：0</p>
+<p><strong>提交</strong></p>
+<p>在test目录下创建一个<code>readme.txt</code>文件，随便写点什么进去并保存</p>
+<p>查看工作副本中的状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> svn status</span></span><br><span class="line">?       readme.txt</span><br></pre></td></tr></table></figure>
+<p>此时readme的状态为?，说明它还未加到版本控制中。</p>
+<p>将readme.txt加到版本控制，等待提交到版本库:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> svn add readme.txt</span></span><br><span class="line">A         readme.txt</span><br></pre></td></tr></table></figure>
+<p>此时readme.txt的状态为A，意味着这个文件已经被成功地添加到了版本控制中。</p>
+<p>注意：如果新增了文件没有使用<code>svn add</code>命令将其添加，则<code>commit</code>时不会被提交。</p>
+<p>为了把readme.txt存储到版本库中，使用<code>commit -m</code>加注释信息来提交。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> svn commit -m <span class="string">"add readme"</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>更新</strong></p>
+<p>如果一个文件hello，A和B两个人都修改了同一行，且A先commit到了SVN服务器，当A直接commit时会报错，例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">svn commit -m &quot;admin modify hello&quot;</span><br><span class="line">Sending        hello</span><br><span class="line">Transmitting file data .done</span><br><span class="line">Committing transaction...</span><br><span class="line">svn: E160028: Commit failed (details follow):</span><br><span class="line">svn: E160028: 文件 “/hello” 已经过时</span><br></pre></td></tr></table></figure>
+<p>会提示当前要提交的hello文件已经没有服务器上的新了，此时就需要使用<code>svn update</code>命令先从服务器拉取服务器上的新版到本地再提交。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">svn update</span><br><span class="line">Updating &apos;.&apos;:</span><br><span class="line">C    hello</span><br><span class="line">A    test.txt</span><br><span class="line">Updated to revision 3.</span><br><span class="line">Summary of conflicts:</span><br><span class="line">  Text conflicts: 1</span><br><span class="line">Conflict discovered in file &apos;hello&apos;.</span><br><span class="line">Select: (p) postpone, (df) show diff, (e) edit file, (m) merge,</span><br><span class="line">        (mc) my side of conflict, (tc) their side of conflict,</span><br><span class="line">        (s) show all options:</span><br></pre></td></tr></table></figure>
+<p><strong>查看历史信息</strong></p>
+<p><code>svn log</code>: 用来展示svn 的版本作者、日期、路径等等。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">svn log #查看提交历史</span><br><span class="line">svn log -r 3:8		# 如果希望查看两个特定版本之间的信息</span><br><span class="line">svn log readme.txt	# 如果想查看一个文件的版本修改信息</span><br><span class="line">svn log -r HEAD		# 查看当前版本库中最新的版本信息</span><br><span class="line">svn log -r &#123;2018-01-01&#125;:&#123;2018-01-20&#125;	# 用时间查找版本号</span><br></pre></td></tr></table></figure>
+<p><code>svn diff</code>: 用来显示特定修改的行级详细信息。主要用来：</p>
+<ul>
+<li>检查本地修改</li>
+<li>比较工作拷贝与版本库</li>
+<li>比较版本库与版本库</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">svn diff 	# 不带任何参数，它将会比较你的工作文件与缓存在.svn的"原始"拷贝</span><br><span class="line">svn diff -r 3 readme.txt  # 比价工作拷贝和版本库中版本号为3的文件readme.txt</span><br><span class="line">svn diff -r 2:3 readme.txt</span><br></pre></td></tr></table></figure>
+<p><code>svn cat</code>：取得在特定版本的某文件显示在当前屏幕。</p>
+<p>如果只是希望检查一个过去版本的文件内容，而不希望查看他们的区别：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn cat -r 版本号 readme.txt  # 显示在该版本号下的该文件内容</span><br></pre></td></tr></table></figure>
+<p><code>svn list</code>: 显示一个目录或某一版本存在的文件。</p>
+<p>可以在不下载文件到本地目录的情况下来察看目录中的文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn list svn://svn.example.com/test</span><br></pre></td></tr></table></figure>
+<p><strong>版本回退</strong></p>
+<p>如果在<code>commit</code>之前我们想放弃对文件的修改，可以使用如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn revert readme.txt	# readme.txt修改的内容将会丢失</span><br></pre></td></tr></table></figure>
+<p>如果是目录，只需加上<code>-R</code>参数即可，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn revert -R data</span><br></pre></td></tr></table></figure>
+<p>如果我们想恢复一个已提交的版本怎么办？</p>
+<p>为了消除一个旧的版本，我们必须撤销旧版本里的所有更改然后提交一个新版本。这种操作叫做<code>reverse merge</code>.</p>
+<p>比如，当前版本是8，我们要撤回上一个版本，回到版本7</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn merge -r 8:7 readme.txt</span><br></pre></td></tr></table></figure>
+<p>则readme.txt此时的内容是第7个版本的内容，此时readme.txt为修改的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">M       readme.txt</span><br></pre></td></tr></table></figure>
+<p><strong>分支与标签</strong></p>
+<h2 id="命令的简写："><a href="#命令的简写：" class="headerlink" title="命令的简写："></a>命令的简写：</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th style="text-align:left">简写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>svn checkout</td>
+<td style="text-align:left">svn co</td>
+</tr>
+<tr>
+<td>svn update</td>
+<td style="text-align:left">svn up</td>
+</tr>
+<tr>
+<td>svn commit</td>
+<td style="text-align:left">svn ci</td>
+</tr>
+<tr>
+<td>svn status</td>
+<td style="text-align:left">svn st</td>
+</tr>
+</tbody>
+</table>
+<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><p>1.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn: E205005: The log message is a pathname (was -F intended?); use &apos;--force-log&apos; to override</span><br></pre></td></tr></table></figure>
+<p>这是因为commit的内容与某个文件名相同</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.runoob.com/svn/" target="_blank" rel="noopener">svn教程</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/svn/">svn</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://dhshen.github.io/2018/01/13/svn入门教程/" data-title="svn入门教程 | 向上爬的蜗牛" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2018/01/15/apache配置/" title="apache配置">
+  <strong>上一篇：</strong><br/>
+  <span>
+  apache配置</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2018/01/13/mac下PHP环境搭建/"  title="mac下PHP环境搭建">
+ <strong>下一篇：</strong><br/> 
+ <span>mac下PHP环境搭建
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/charles/" title="charles">charles<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/apache/" title="apache">apache<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/webpack/" title="webpack">webpack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/less/" title="less">less<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="dhshen">dhshen</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

@@ -1,0 +1,603 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>https配置与部署 | 向上爬的蜗牛</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="dhshen">
+    
+
+    
+    <meta name="description" content="Question1.HTTPS证书支持覆盖二级域名吗？ 2.如何选择证书提供商(CA)？ 3.如何申请免费的证书？ 4.使用https后对原来的应用有哪些影响？ 5.使用https后怎么通过charles抓包分析？ 概念 https证书的类型： 123DV SSL证书：域名型OV SSL证书：企业型EV SSL证书：增强型 DV SSL证书：指只验证网站域名所有权的简易型SSL证书，此类证书仅能起">
+<meta name="keywords" content="https">
+<meta property="og:type" content="article">
+<meta property="og:title" content="https配置与部署">
+<meta property="og:url" content="https://dhshen.github.io/2017/05/11/https配置与部署/index.html">
+<meta property="og:site_name" content="向上爬的蜗牛">
+<meta property="og:description" content="Question1.HTTPS证书支持覆盖二级域名吗？ 2.如何选择证书提供商(CA)？ 3.如何申请免费的证书？ 4.使用https后对原来的应用有哪些影响？ 5.使用https后怎么通过charles抓包分析？ 概念 https证书的类型： 123DV SSL证书：域名型OV SSL证书：企业型EV SSL证书：增强型 DV SSL证书：指只验证网站域名所有权的简易型SSL证书，此类证书仅能起">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgjj75g3j30ni08yacv.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNc79gy1ffhgbua5ccj30o2094n01.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1ffhggp0semj30oc0ffjsx.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgn3d4slj30oa0fdtcm.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tKfTcgy1ffhgshfzxtj30e80c1tbg.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgtih3yqj30rh0ij0v8.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhgz3fi2jj306a0a475q.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tKfTcgy1ffhh2dfb0oj30gf0c8dh3.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhhddrbj5j308y0ajdgq.jpg">
+<meta property="og:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhhl8kb77j30ng08vq5r.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhhk4fv2kj30or07lwf7.jpg">
+<meta property="og:image" content="http://img.blog.csdn.net/20160612203310693">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNc79ly1ffhifp363kj30pw02st9a.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjeaj7hjj31kg0u97ee.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjgorg5nj30fw03aaah.jpg">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1ffhjq84wkej307k053t9r.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjrb0wyij31410l8gmm.jpg">
+<meta property="og:updated_time" content="2018-01-15T11:51:16.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="https配置与部署">
+<meta name="twitter:description" content="Question1.HTTPS证书支持覆盖二级域名吗？ 2.如何选择证书提供商(CA)？ 3.如何申请免费的证书？ 4.使用https后对原来的应用有哪些影响？ 5.使用https后怎么通过charles抓包分析？ 概念 https证书的类型： 123DV SSL证书：域名型OV SSL证书：企业型EV SSL证书：增强型 DV SSL证书：指只验证网站域名所有权的简易型SSL证书，此类证书仅能起">
+<meta name="twitter:image" content="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgjj75g3j30ni08yacv.jpg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="向上爬的蜗牛" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="向上爬的蜗牛">向上爬的蜗牛</a></h1>
+				<h2 class="blog-motto">记录搬砖路上的点点滴滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:dhshen.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/05/11/https配置与部署/" title="https配置与部署" itemprop="url">https配置与部署</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="dhshen" target="_blank" itemprop="author">dhshen</a>
+		
+  <p class="article-time">
+    <time datetime="2017-05-11T07:30:04.000Z" itemprop="datePublished"> 发表于 2017-05-11</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p>1.HTTPS证书支持覆盖二级域名吗？</p>
+<p>2.如何选择证书提供商(CA)？</p>
+<p>3.如何申请免费的证书？</p>
+<p>4.使用https后对原来的应用有哪些影响？</p>
+<p>5.使用https后怎么通过charles抓包分析？</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ol>
+<li><p>https证书的类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DV SSL证书：域名型</span><br><span class="line">OV SSL证书：企业型</span><br><span class="line">EV SSL证书：增强型</span><br></pre></td></tr></table></figure>
+<p><strong>DV SSL</strong>证书：指只验证网站域名所有权的简易型SSL证书，此类证书仅能起到网站机密信息加密的作用，无法向用户证明网站的真实身份。所以，不推荐在电子商务网站部署 DV SSL证书，因为电子商务首先需要的是在线信任，其次才是在线安全。</p>
+<p><strong>OV SSL</strong> 是 Organization Validation SSL 的缩写，指需要验证网站所有单位的真实身份的标准型SSL证书，此类证书也就是正常的SSL证书，不仅能起到网站机密信息加密的作用，而且能向用户证明网站的真实身份。所以，推荐在所有电子商务网站使用，因为电子商务需要的是在线信任和在线安全。从 SSL 证书的诞生史可以看出：标准型 SSL 证书就是 OV SSL证书(Organization Validation SSL)。</p>
+<p><strong>EV SSL</strong> 是 Extended Validation SSL 的缩写，指遵循全球统一的严格身份验证标准颁发的SSL证书，是目前业界最高安全级别的SSL证书。用户访问部署了EV SSL证书的网站，不仅浏览器地址栏会显示安全锁标志，而且浏览器地址栏会变成绿色。所以，推荐所有电子商务网站都部署EV SSL证书，因为电子商务首先需要的是在线信任，其次才是在线安全。EV SSL证书，绿色安全通道，增强在线信任，促成更多在线订单！</p>
+</li>
+<li><p>证书按覆盖范围分为：</p>
+<ul>
+<li><strong>单域名证书</strong>：只能用于单一域名</li>
+<li><strong>通配符证书</strong>：可以用于某个域名及其所有一级子域名。</li>
+<li><strong>多域名证书</strong>：可以用于多个域名</li>
+</ul>
+</li>
+<li><p>选择证书提供商(CA)</p>
+<blockquote>
+<p>浏览器和操作系统支持程度（即公网受信）</p>
+<p>证书类型</p>
+<p>维护成本</p>
+</blockquote>
+</li>
+<li><p>申请免费的https证书</p>
+<p><a href="https://console.qcloud.com/ssl" target="_blank" rel="noopener">腾讯云免费证书</a></p>
+<p>let’s encrypt：推荐比较多的，但是实际操作起来还是比较繁琐。</p>
+</li>
+</ol>
+<h4 id="腾讯云的免费DV证书申请"><a href="#腾讯云的免费DV证书申请" class="headerlink" title="腾讯云的免费DV证书申请"></a>腾讯云的免费DV证书申请</h4><p>申请地址：<a href="https://console.qcloud.com/ssl" target="_blank" rel="noopener">https://console.qcloud.com/ssl</a></p>
+<p>免费证书是由<code>亚洲诚信TrustAsia</code>提供的免费版DVSSL证书，有效期是一年。</p>
+<p>免费的DV证书只支持单域名，支持多域名和通配符的证书需要付费购买，所以如果有多个子域名，需要一个个的申请。</p>
+<p>申请的流程也特别的简单，如果选择的是文件验证，添加文件后等待CA来验证就好了，大概几分钟左右验证通过后就会颁发证书，就可以在腾讯云的后台管理里下载证书了。</p>
+<p>下载证书后怎么配置nginx呢，可以参考腾讯云的<a href="https://www.qcloud.com/document/product/400/4143" target="_blank" rel="noopener">证书安装指引</a></p>
+<h2 id="Nginx配置https"><a href="#Nginx配置https" class="headerlink" title="Nginx配置https"></a>Nginx配置https</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    listen 443;</span><br><span class="line">    server_name xxx.xxx.com;</span><br><span class="line">    root /opt/https/;</span><br><span class="line"></span><br><span class="line">    ssl on;</span><br><span class="line">    ssl_certificate vhost/keys/xxx.xxx.com.crt;</span><br><span class="line">    ssl_certificate_key vhost/keys/xxx.xxx.com.key;</span><br><span class="line">    ssl_session_timeout 5m;</span><br><span class="line">    ssl_protocols TLSv1 TLSv1.1 TLSv1.2; #按照这个协议配置</span><br><span class="line">    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;#按照这个套件配置</span><br><span class="line">    ssl_prefer_server_ciphers on;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        index index.html;</span><br><span class="line">        root /opt/https;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>配置文件参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>listen 443</td>
+<td>SSL访问端口号为443</td>
+</tr>
+<tr>
+<td>ssl on</td>
+<td>启用SSL功能</td>
+</tr>
+<tr>
+<td>ssl_certificate</td>
+<td>证书文件</td>
+</tr>
+<tr>
+<td>ssl_certificate_key</td>
+<td>私钥文件</td>
+</tr>
+<tr>
+<td>ssl_protocols</td>
+<td>使用的协议</td>
+</tr>
+<tr>
+<td>ssl_ciphers</td>
+<td>配置加密套件，写法遵循openssl标准</td>
+</tr>
+</tbody>
+</table>
+<h5 id="使用全站加密-http自动跳转https"><a href="#使用全站加密-http自动跳转https" class="headerlink" title="使用全站加密,http自动跳转https"></a>使用全站加密,http自动跳转https</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name xxx.xxx.com;</span><br><span class="line">    rewrite ^(.*) https://$host$1 permanent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用HTTPS可能带来的问题"><a href="#使用HTTPS可能带来的问题" class="headerlink" title="使用HTTPS可能带来的问题"></a>使用HTTPS可能带来的问题</h2><ol>
+<li>https网站中存在http外部接口</li>
+<li>CDN静态资源使用了http</li>
+<li>charles抓包调试</li>
+</ol>
+<h2 id="Charles配置可获取https数据（Mac-os下）"><a href="#Charles配置可获取https数据（Mac-os下）" class="headerlink" title="Charles配置可获取https数据（Mac os下）"></a>Charles配置可获取https数据（Mac os下）</h2><p>本配置说明分为PC端和移动端。</p>
+<h3 id="PC端"><a href="#PC端" class="headerlink" title="PC端"></a>PC端</h3><p>安装配置 Charles 根证书</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgjj75g3j30ni08yacv.jpg" alt=""></p>
+<p>保存Charles的Root Certificate，一个xxx.pem文件。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNc79gy1ffhgbua5ccj30o2094n01.jpg" alt=""></p>
+<p>调出mac下的钥匙串访问</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgy1ffhggp0semj30oc0ffjsx.jpg" alt=""></p>
+<p>点击左侧的登录，然后把第一步中保存的xxx.pem文件拖到右侧中，此时的情况是：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgn3d4slj30oa0fdtcm.jpg" alt=""></p>
+<p>系统默认是不信任 Charles 的证书的，此时对证书右键，在弹出的下拉菜单中选择『显示简介』，点击使用此证书时，把使用系统默认改为始终信任，如下图：</p>
+<p><img src="https://ww2.sinaimg.cn/large/006tKfTcgy1ffhgshfzxtj30e80c1tbg.jpg" alt=""></p>
+<p>最终：</p>
+<p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhgtih3yqj30rh0ij0v8.jpg" alt=""></p>
+<p>配置到这一步还不能抓取https，还要配置一下Charles的SSL设置</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhgz3fi2jj306a0a475q.jpg" alt=""></p>
+<p><img src="https://ww1.sinaimg.cn/large/006tKfTcgy1ffhh2dfb0oj30gf0c8dh3.jpg" alt=""></p>
+<p>设置host为<code>*</code>就可以抓取所有的https站点的数据啦，当然你也可以选择一个一个添加，只抓取已经添加了的域名。</p>
+<p>现在我们就可以在Charles中抓到https的包咯。</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhhddrbj5j308y0ajdgq.jpg" alt=""></p>
+<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><p><img src="https://ww3.sinaimg.cn/large/006tKfTcgy1ffhhl8kb77j30ng08vq5r.jpg" alt=""></p>
+<p>点击在移动设备上安装Root Certificate证书，会弹出下列提示：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tKfTcgy1ffhhk4fv2kj30or07lwf7.jpg" alt=""></p>
+<p>在手机浏览器中打开<code>charlesproxy.com/getssl</code>这个链接，会跳转到证书安装界面：</p>
+<p><img src="http://img.blog.csdn.net/20160612203310693" alt=""></p>
+<p>点击安装。</p>
+<p>然后就可以抓取移动端的https包了。</p>
+<p>关键的地方来了，经过上述操作之后我们可以抓取移动端Safari浏览器的https的包，因为我们已经在IOS内信任了Charles的证书，但是微信浏览器它似乎不是用的系统的信任体系，因此有了如下的错误提示：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNc79ly1ffhifp363kj30pw02st9a.jpg" alt=""></p>
+<p><code>unknown_ca</code>说明微信浏览器并不信任Charles的 Root Certificate。</p>
+<p>因为微信浏览器默认拒绝不安全的<em>https</em>，因此屏幕会直接提示网络出错。0……0</p>
+<p>微信端的手机调试应该会比较头疼了，在此推荐一下另外一种调试方式吧。</p>
+<h3 id="微信web开发者工具"><a href="#微信web开发者工具" class="headerlink" title="微信web开发者工具"></a>微信web开发者工具</h3><p><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html" target="_blank" rel="noopener">微信web开发者工具下载地址</a></p>
+<p>使用<strong>“微信web开发者工具”</strong>，可以像chrome devTool那样看每一个请求。</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjeaj7hjj31kg0u97ee.jpg" alt=""></p>
+<p>微信web开发者工具可以用来做公众号和小程序开发的调试，因此我们可以用它来调试公众号内页面。但是牵涉到与微信本身功能相关的地方（比如说获取openid）就需要是该公众号的开发者才行，否则会提示：</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjgorg5nj30fw03aaah.jpg" alt=""></p>
+<p>遇到这种问题时就需要登陆该微信公众号的后台，把开发者的微信添加为“开发者”。</p>
+<p>微信web开发者工具令人叫好的地方是，它有一个功能叫<strong>代理！！！</strong></p>
+<p><img src="https://ww2.sinaimg.cn/large/006tNc79gy1ffhjq84wkej307k053t9r.jpg" alt=""></p>
+<p>进入微信web开发者工具的设置-&gt;代理</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79gy1ffhjrb0wyij31410l8gmm.jpg" alt=""></p>
+<p><strong>如上设置并保存后，我们就可以像是在手机端调试一样，被charles抓到包了！！！</strong></p>
+<p><strong>如果没有设置代理，微信web开发者工具内的包是不会被charles抓到的！！！</strong></p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a href="http://www.wosign.com/FAQ/SSL_type_check.htm" target="_blank" rel="noopener">SSL证书有哪几种？如何识别这几种SSL证书</a></p>
+<p><a href="https://ksmx.me/letsencrypt-ssl-https/" target="_blank" rel="noopener">Let’s Encrypt 给网站加 HTTPS 完全指南</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2016/08/migrate-from-http-to-https.html" target="_blank" rel="noopener">HTTPS 升级指南</a></p>
+<p><a href="http://blog.csdn.net/yangmeng13930719363/article/details/51645435" target="_blank" rel="noopener">使用 Charles 获取 https 的数据</a></p>
+<p>charles配置部分第4、5张以及倒数第2张图片摘自<a href="http://blog.csdn.net/yangmeng13930719363/article/details/51645435" target="_blank" rel="noopener">使用 Charles 获取 https 的数据</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/https/">https</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://dhshen.github.io/2017/05/11/https配置与部署/" data-title="https配置与部署 | 向上爬的蜗牛" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/06/12/docker实践之搭建本地php环境/" title="docker实践之搭建本地php环境">
+  <strong>上一篇：</strong><br/>
+  <span>
+  docker实践之搭建本地php环境</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/05/11/Charles配置获取https数据/"  title="Charles配置获取https数据">
+ <strong>下一篇：</strong><br/> 
+ <span>Charles配置获取https数据
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/charles/" title="charles">charles<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/apache/" title="apache">apache<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/webpack/" title="webpack">webpack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/less/" title="less">less<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="dhshen">dhshen</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
