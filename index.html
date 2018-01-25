@@ -70,15 +70,37 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2018/01/24/Linux运维常用命令/" title="Linux运维常用命令" itemprop="url">
+  
+    <h1 itemprop="name">Linux运维常用命令</h1>
+    
+     
+           <p itemprop="description" >打包压缩与解压缩打包：
+12tar -cvf 包名.tar 打包目标  # 打包目标可以是目录或文件，例如打包所有的jpg，*.jpgtar -czf 包名.tar.gz 打包目标 # 打包成.gz结尾的包
+解压缩：
+12tar -xvf 包名.tar					 # 解压tar包</p>
+        
+    
+    <time datetime="2018-01-24T02:12:45.000Z" itemprop="datePublished">2018-01-24</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2018/01/15/apache配置/" title="apache配置" itemprop="url">
   
     <h1 itemprop="name">apache配置</h1>
     
      
-           <p itemprop="description" >apache配置支持include1.首先，去掉以下配置前的注释
-1LoadModule include_module libexec/apache2/mod_include.so
-2.打开这两条注释
-12AddType text/html .shtmlAddOutputFilt</p>
+           <p itemprop="description" >什么是shtml简单的说，*.shtml文件就是html文件加个ssi。
+SSI：Server Side Include
+SSI机制是动态包含，而不是静态生成，是由web服务器比如appache在收到用户的请求时，如果解析到其中有SSI包含指令时，自动去除被包含的页面嵌入到被请求</p>
         
     
     <time datetime="2018-01-15T11:53:37.000Z" itemprop="datePublished">2018-01-15</time>
@@ -386,29 +408,6 @@ UI组件UI组件的特征：
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2017/08/05/yarn的使用/" title="yarn的使用" itemprop="url">
-  
-    <h1 itemprop="name">yarn的使用</h1>
-    
-     
-           <p itemprop="description" >测试yarn是否安装1yarn --version
-开始新项目1yarn init
-添加包依赖123yarn add [package]yarn add [package]@[version]yarn add [package]@[tag]
-分别添加到 devDependenci</p>
-        
-    
-    <time datetime="2017-08-05T00:14:18.000Z" itemprop="datePublished">2017-08-05</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -464,19 +463,11 @@ UI组件UI组件的特征：
 			
 		
 			
-				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/apache/" title="apache">apache<sup>1</sup></a></li>
+				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
 			
 		
 			
@@ -484,11 +475,15 @@ UI组件UI组件的特征：
 			
 		
 			
-				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+				<li><a href="/tags/运维/" title="运维">运维<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/webpack/" title="webpack">webpack<sup>1</sup></a></li>
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
 			
 		
 			
@@ -496,11 +491,15 @@ UI组件UI组件的特征：
 			
 		
 			
-				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+				<li><a href="/tags/antd/" title="antd">antd<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
 			
 		
 			
@@ -508,7 +507,7 @@ UI组件UI组件的特征：
 			
 		
 			
-				<li><a href="/tags/less/" title="less">less<sup>1</sup></a></li>
+				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
 			
 		
 		</ul>

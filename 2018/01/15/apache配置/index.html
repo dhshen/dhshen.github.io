@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="apache配置支持include1.首先，去掉以下配置前的注释 1LoadModule include_module libexec/apache2/mod_include.so 2.打开这两条注释 12AddType text/html .shtmlAddOutputFilter INCLUDES .shtml 3.在虚拟主机配置中添加Options Indexes FollowSymLink">
+    <meta name="description" content="什么是shtml简单的说，*.shtml文件就是html文件加个ssi。 SSI：Server Side Include SSI机制是动态包含，而不是静态生成，是由web服务器比如appache在收到用户的请求时，如果解析到其中有SSI包含指令时，自动去除被包含的页面嵌入到被请求的页面中一起当做一个整体的页面发送给用户，对用户来说根本不知道服务器做了啥，只是知道得到了一个完整的页面。 应用它可以把">
 <meta name="keywords" content="apache">
 <meta property="og:type" content="article">
 <meta property="og:title" content="apache配置">
 <meta property="og:url" content="https://dhshen.github.io/2018/01/15/apache配置/index.html">
 <meta property="og:site_name" content="向上爬的蜗牛">
-<meta property="og:description" content="apache配置支持include1.首先，去掉以下配置前的注释 1LoadModule include_module libexec/apache2/mod_include.so 2.打开这两条注释 12AddType text/html .shtmlAddOutputFilter INCLUDES .shtml 3.在虚拟主机配置中添加Options Indexes FollowSymLink">
+<meta property="og:description" content="什么是shtml简单的说，*.shtml文件就是html文件加个ssi。 SSI：Server Side Include SSI机制是动态包含，而不是静态生成，是由web服务器比如appache在收到用户的请求时，如果解析到其中有SSI包含指令时，自动去除被包含的页面嵌入到被请求的页面中一起当做一个整体的页面发送给用户，对用户来说根本不知道服务器做了啥，只是知道得到了一个完整的页面。 应用它可以把">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-15T12:08:31.069Z">
+<meta property="og:updated_time" content="2018-01-25T12:16:04.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="apache配置">
-<meta name="twitter:description" content="apache配置支持include1.首先，去掉以下配置前的注释 1LoadModule include_module libexec/apache2/mod_include.so 2.打开这两条注释 12AddType text/html .shtmlAddOutputFilter INCLUDES .shtml 3.在虚拟主机配置中添加Options Indexes FollowSymLink">
+<meta name="twitter:description" content="什么是shtml简单的说，*.shtml文件就是html文件加个ssi。 SSI：Server Side Include SSI机制是动态包含，而不是静态生成，是由web服务器比如appache在收到用户的请求时，如果解析到其中有SSI包含指令时，自动去除被包含的页面嵌入到被请求的页面中一起当做一个整体的页面发送给用户，对用户来说根本不知道服务器做了啥，只是知道得到了一个完整的页面。 应用它可以把">
 
     
     <link rel="alternative" href="/atom.xml" title="向上爬的蜗牛" type="application/atom+xml">
@@ -89,15 +89,32 @@
 </header>
 	<div class="article-content">
 		
-		<h2 id="apache配置支持include"><a href="#apache配置支持include" class="headerlink" title="apache配置支持include"></a>apache配置支持include</h2><p>1.首先，去掉以下配置前的注释</p>
+		<h2 id="什么是shtml"><a href="#什么是shtml" class="headerlink" title="什么是shtml"></a>什么是shtml</h2><p>简单的说，*.shtml文件就是html文件加个ssi。</p>
+<p>SSI：Server Side Include</p>
+<p>SSI机制是动态包含，而不是静态生成，是由web服务器比如appache在收到用户的请求时，如果解析到其中有SSI包含指令时，自动去除被包含的页面嵌入到被请求的页面中一起当做一个整体的页面发送给用户，对用户来说根本不知道服务器做了啥，只是知道得到了一个完整的页面。</p>
+<p>应用它可以把网站中的一些公共区域做成独立的页面，然后利用此技术嵌入到其它需要此区域内容的页面中去。比如像全站的头部和尾部，全站最新新闻等。</p>
+<p>事实上，.html文件同样可以开启SSI，只需在apache里进行相应的配置，一旦开启SSI，.html文件和.shtml文件可以一样对待了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AddType text/html .shtml .html</span><br><span class="line">AddOutputFilter INCLUDES .shtml .html</span><br></pre></td></tr></table></figure>
+<p><strong>include语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--#include file=&quot;btn.html&quot;--&gt;</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--#include virtual=&quot;btn.html&quot;--&gt;</span><br></pre></td></tr></table></figure>
+<p>两者有什么区别呢？</p>
+<p>include元素能按file属性或virtual属性判断应该包含的文件。</p>
+<p>file属性是一个相对于当前目录的文件路径，即不能是一个绝对路径(以<code>/</code>开头)或包含<code>../</code>的路径，也就是说被包含文件可以在同一级目录或其子目录中，但不能在上一级目录中。</p>
+<p>virtual属性可能更有用，它是一个相对于被提供的文档的URL，可以以<code>/</code>开头，但必须与被提供的文档位于同一服务器上，virtual文件名是WEB站点上的虚拟目录的完整路径。</p>
+<h2 id="apache配置支持include-shtml"><a href="#apache配置支持include-shtml" class="headerlink" title="apache配置支持include(shtml)"></a>apache配置支持include(shtml)</h2><p>1.首先，去掉以下配置前的注释</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoadModule include_module libexec/apache2/mod_include.so</span><br></pre></td></tr></table></figure>
 <p>2.打开这两条注释</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AddType text/html .shtml</span><br><span class="line">AddOutputFilter INCLUDES .shtml</span><br></pre></td></tr></table></figure>
 <p>3.在虚拟主机配置中添加<code>Options Indexes FollowSymLinks IncludesNOEXEC</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName www.example.com</span><br><span class="line">    DocumentRoot /Users/example/workspace/</span><br><span class="line">    &lt;Directory /Users/example/workspace/&gt;</span><br><span class="line">    	Options Indexes FollowSymLinks IncludesNOEXEC</span><br><span class="line">        AllowOverride All</span><br><span class="line">        Allow from all</span><br><span class="line">        Require all granted</span><br><span class="line">    &lt;/Directory&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
 <p>4.重启apache服务器</p>
-<p>附include语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--#include file=&quot;btn.html&quot;--&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="htaccess文件"><a href="#htaccess文件" class="headerlink" title=".htaccess文件"></a>.htaccess文件</h2><p>##遇到的问题</p>
+<h4 id="解决VirtualHost只有一个有效"><a href="#解决VirtualHost只有一个有效" class="headerlink" title="解决VirtualHost只有一个有效"></a>解决VirtualHost只有一个有效</h4><p>设置了多个<code>VirtualHost</code>，只有第一个起作用，只需要在设置<code>VirtualHost</code>的上面加入一行就可以了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NamevirtualHost *:80</span><br></pre></td></tr></table></figure>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.cnblogs.com/zichi/p/5111159.html" target="_blank" rel="noopener">.html 、.htm 、 .shtml 以及 .shtm 四种扩展名的文件区别</a></p>
+<p><a href="http://www.cnblogs.com/zichi/p/4889075.html" target="_blank" rel="noopener">Apache下开启SSI配置使html支持include包含</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -128,6 +145,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2018/01/24/Linux运维常用命令/" title="Linux运维常用命令">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Linux运维常用命令</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2018/01/13/svn入门教程/"  title="svn入门教程">
@@ -192,19 +217,11 @@
 			
 		
 			
-				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/apache/" title="apache">apache<sup>1</sup></a></li>
+				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
 			
 		
 			
@@ -212,11 +229,15 @@
 			
 		
 			
-				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+				<li><a href="/tags/运维/" title="运维">运维<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/webpack/" title="webpack">webpack<sup>1</sup></a></li>
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
 			
 		
 			
@@ -224,11 +245,15 @@
 			
 		
 			
-				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+				<li><a href="/tags/antd/" title="antd">antd<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
 			
 		
 			
@@ -236,7 +261,7 @@
 			
 		
 			
-				<li><a href="/tags/less/" title="less">less<sup>1</sup></a></li>
+				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
 			
 		
 		</ul>

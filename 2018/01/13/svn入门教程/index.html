@@ -20,7 +20,7 @@
 <meta property="og:description" content="毕业后的一个东家使用的就是svn，对svn的使用仅限于师兄手把手教的拉代码、添加代码、提交以及使用BeyondCompare工具比较代码等，而且是基于图形界面的操作。转眼已经过去两年，这两年一直用的git，而且一直以命令的方式使用git，感觉git用起来很顺手，但是最近换了工作，公司内部的一些项目还是用的svn，想起当初学习了廖雪峰老师的Git教程让我对Git有一个基本的了解与熟悉，能够熟练的使用">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fng7bfs1pyj30fb09gweh.jpg">
-<meta property="og:updated_time" content="2018-01-15T11:51:16.732Z">
+<meta property="og:updated_time" content="2018-01-24T07:25:57.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="svn入门教程">
 <meta name="twitter:description" content="毕业后的一个东家使用的就是svn，对svn的使用仅限于师兄手把手教的拉代码、添加代码、提交以及使用BeyondCompare工具比较代码等，而且是基于图形界面的操作。转眼已经过去两年，这两年一直用的git，而且一直以命令的方式使用git，感觉git用起来很顺手，但是最近换了工作，公司内部的一些项目还是用的svn，想起当初学习了廖雪峰老师的Git教程让我对Git有一个基本的了解与熟悉，能够熟练的使用">
@@ -158,6 +158,8 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> svn add readme.txt</span></span><br><span class="line">A         readme.txt</span><br></pre></td></tr></table></figure>
 <p>此时readme.txt的状态为A，意味着这个文件已经被成功地添加到了版本控制中。</p>
 <p>注意：如果新增了文件没有使用<code>svn add</code>命令将其添加，则<code>commit</code>时不会被提交。</p>
+<p>删除文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> svn delete filename</span></span><br><span class="line">D         filename</span><br></pre></td></tr></table></figure>
 <p>为了把readme.txt存储到版本库中，使用<code>commit -m</code>加注释信息来提交。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> svn commit -m <span class="string">"add readme"</span></span></span><br></pre></td></tr></table></figure>
 <p><strong>更新</strong></p>
@@ -325,19 +327,11 @@
 			
 		
 			
-				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/apache/" title="apache">apache<sup>1</sup></a></li>
+				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
 			
 		
 			
@@ -345,11 +339,15 @@
 			
 		
 			
-				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+				<li><a href="/tags/运维/" title="运维">运维<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/webpack/" title="webpack">webpack<sup>1</sup></a></li>
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
 			
 		
 			
@@ -357,11 +355,15 @@
 			
 		
 			
-				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+				<li><a href="/tags/antd/" title="antd">antd<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
 			
 		
 			
@@ -369,7 +371,7 @@
 			
 		
 			
-				<li><a href="/tags/less/" title="less">less<sup>1</sup></a></li>
+				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
 			
 		
 		</ul>
