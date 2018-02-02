@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="打包压缩与解压缩打包： 12tar -cvf 包名.tar 打包目标  # 打包目标可以是目录或文件，例如打包所有的jpg，*.jpgtar -czf 包名.tar.gz 打包目标 # 打包成.gz结尾的包 解压缩： 12tar -xvf 包名.tar					 # 解压tar包tar -xzvf file.tar.gz			  # 解压tar.gz 参考链接：tar压缩解压缩命令详解 查看系统内">
+    <meta name="description" content="打包压缩与解压缩打包： 12tar -cvf 包名.tar 打包目标  # 打包目标可以是目录或文件，例如打包所有的jpg，*.jpgtar -czf 包名.tar.gz 打包目标 # 打包成.gz结尾的包 解压缩： 12tar -xvf 包名.tar					 # 解压tar包tar -xzvf file.tar.gz			  # 解压tar.gz 参数说明： 12345-c: 打包选项-v:">
 <meta name="keywords" content="运维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux运维常用命令">
 <meta property="og:url" content="https://dhshen.github.io/2018/01/24/Linux运维常用命令/index.html">
 <meta property="og:site_name" content="向上爬的蜗牛">
-<meta property="og:description" content="打包压缩与解压缩打包： 12tar -cvf 包名.tar 打包目标  # 打包目标可以是目录或文件，例如打包所有的jpg，*.jpgtar -czf 包名.tar.gz 打包目标 # 打包成.gz结尾的包 解压缩： 12tar -xvf 包名.tar					 # 解压tar包tar -xzvf file.tar.gz			  # 解压tar.gz 参考链接：tar压缩解压缩命令详解 查看系统内">
+<meta property="og:description" content="打包压缩与解压缩打包： 12tar -cvf 包名.tar 打包目标  # 打包目标可以是目录或文件，例如打包所有的jpg，*.jpgtar -czf 包名.tar.gz 打包目标 # 打包成.gz结尾的包 解压缩： 12tar -xvf 包名.tar					 # 解压tar包tar -xzvf file.tar.gz			  # 解压tar.gz 参数说明： 12345-c: 打包选项-v:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-25T12:13:48.436Z">
+<meta property="og:updated_time" content="2018-02-01T02:25:18.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux运维常用命令">
-<meta name="twitter:description" content="打包压缩与解压缩打包： 12tar -cvf 包名.tar 打包目标  # 打包目标可以是目录或文件，例如打包所有的jpg，*.jpgtar -czf 包名.tar.gz 打包目标 # 打包成.gz结尾的包 解压缩： 12tar -xvf 包名.tar					 # 解压tar包tar -xzvf file.tar.gz			  # 解压tar.gz 参考链接：tar压缩解压缩命令详解 查看系统内">
+<meta name="twitter:description" content="打包压缩与解压缩打包： 12tar -cvf 包名.tar 打包目标  # 打包目标可以是目录或文件，例如打包所有的jpg，*.jpgtar -czf 包名.tar.gz 打包目标 # 打包成.gz结尾的包 解压缩： 12tar -xvf 包名.tar					 # 解压tar包tar -xzvf file.tar.gz			  # 解压tar.gz 参数说明： 12345-c: 打包选项-v:">
 
     
     <link rel="alternative" href="/atom.xml" title="向上爬的蜗牛" type="application/atom+xml">
@@ -93,12 +93,20 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf 包名.tar 打包目标  <span class="comment"># 打包目标可以是目录或文件，例如打包所有的jpg，*.jpg</span></span><br><span class="line">tar -czf 包名.tar.gz 打包目标 <span class="comment"># 打包成.gz结尾的包</span></span><br></pre></td></tr></table></figure>
 <p>解压缩：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf 包名.tar					 <span class="comment"># 解压tar包</span></span><br><span class="line">tar -xzvf file.tar.gz			  <span class="comment"># 解压tar.gz</span></span><br></pre></td></tr></table></figure>
-<p>参考链接：<a href="http://www.cnblogs.com/jyaray/archive/2011/04/30/2033362.html" target="_blank" rel="noopener">tar压缩解压缩命令详解</a></p>
+<p>参数说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-c: 打包选项</span><br><span class="line">-v: 显示打包进度</span><br><span class="line">-f: 使用档案文件</span><br><span class="line">-x: 解包选项</span><br><span class="line">-z: 解压gz文件</span><br></pre></td></tr></table></figure>
 <h2 id="查看系统内存占用"><a href="#查看系统内存占用" class="headerlink" title="查看系统内存占用"></a>查看系统内存占用</h2><p>df命令</p>
+<p>查看当前系统盘的存储空间大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h2 id="文件查找"><a href="#文件查找" class="headerlink" title="文件查找"></a>文件查找</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name 文件名	<span class="comment"># 从根目录开始搜寻文件</span></span><br></pre></td></tr></table></figure>
 <p>示例：</p>
 <p>查找大于100M的大文件：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -size +100M -exec ls -lh &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<h2 id="查看文本内容"><a href="#查看文本内容" class="headerlink" title="查看文本内容"></a>查看文本内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">head -1 filename	<span class="comment"># 显示文件第一行</span></span><br><span class="line">tail -5 filename	<span class="comment"># 显示文件倒数5行</span></span><br><span class="line">tail -f filename	<span class="comment"># 动态显示文件最新信息</span></span><br><span class="line">diff a.txt b.txt	<span class="comment"># 比较文件的差别，如果相同则什么都不会显示，有差异则会显示差异部分</span></span><br><span class="line">cat -n filename		<span class="comment"># 显示的同时显示行号</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sort filename | uniq		<span class="comment"># 消除重复行</span></span><br><span class="line">sort filename | uniq -c		<span class="comment"># 统计各行在文件中出现的次数</span></span><br><span class="line">sort filename | uniq -d		<span class="comment"># 找出重复行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l filename		<span class="comment"># 统计行数</span></span><br></pre></td></tr></table></figure>
+<p>##sed：文本替换</p>
+<p>mac下与centos等Linux系统有差异</p>
 <p>##创建软链接</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s 源文件 目标文件</span><br></pre></td></tr></table></figure>
 <p>源文件：软链接指向的文件</p>
@@ -124,7 +132,7 @@
 </li>
 </ul>
 <p>导出示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导出所有的数据库，(包括系统数据库)</span></span><br><span class="line">mysqldump -h 数据库主机IP -u用户名 -p密码 --all-databases &gt; 导出文件名.sql</span><br><span class="line"><span class="comment"># 导出某几个数据库</span></span><br><span class="line">mysqldump -h 数据库主机IP -u用户名 -p密码 --database DB1 DB2 DB3 &gt; 导出文件名.sql</span><br><span class="line"><span class="comment"># 跨服务器导出导入数据</span></span><br><span class="line"><span class="comment"># 将h1服务器中的db1数据库的所有数据导入到h2中的db2数据库中，db2的数据库必须存在否则会报错</span></span><br><span class="line">mysqldump --host=h1 -u用户名 -p密码 --databases db1 | mysql --host=h2 -u用户名 -p密码 db2</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导出所有的数据库，(包括系统数据库)</span></span><br><span class="line">mysqldump -h 数据库主机IP -u用户名 -p密码 --all-databases &gt; 导出文件名.sql</span><br><span class="line"><span class="comment"># 导出某几个数据库</span></span><br><span class="line">mysqldump -h 数据库主机IP -u用户名 -p密码 --databases DB1 DB2 DB3 &gt; 导出文件名.sql</span><br><span class="line"><span class="comment"># 跨服务器导出导入数据</span></span><br><span class="line"><span class="comment"># 将h1服务器中的db1数据库的所有数据导入到h2中的db2数据库中，db2的数据库必须存在否则会报错</span></span><br><span class="line">mysqldump --host=h1 -u用户名 -p密码 --databases db1 | mysql --host=h2 -u用户名 -p密码 db2</span><br></pre></td></tr></table></figure>
 <p>##Linux定时任务</p>
 <p><strong>crontab命令</strong></p>
 <p>编辑一个定时任务</p>
@@ -134,7 +142,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">第1列分钟0～59</span><br><span class="line">第2列小时0～23（0表示子夜）</span><br><span class="line">第3列日1～31</span><br><span class="line">第4列月1～12</span><br><span class="line">第5列星期0～7（0和7表示星期天）</span><br><span class="line">第6列要运行的命令</span><br></pre></td></tr></table></figure>
 <p>示例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">* * * * * <span class="built_in">command</span>			<span class="comment"># 每一分钟执行一次</span></span><br><span class="line">3,15 * * * * <span class="built_in">command</span>		<span class="comment"># 每小时的第3和第5分钟执行</span></span><br><span class="line">3,5 8-11 * * * <span class="built_in">command</span>	    <span class="comment"># 在上午8点-11点的第3和第5分钟执行</span></span><br><span class="line">3,15 8-11 */2  *  * <span class="built_in">command</span>	<span class="comment"># 每隔两天的上午8点到11点的第3和第15分钟执行</span></span><br></pre></td></tr></table></figure>
-<h2 id="收藏链接"><a href="#收藏链接" class="headerlink" title="收藏链接"></a>收藏链接</h2><p><a href="https://cnodejs.org/topic/56dc21f1502596633dc2c3dc" target="_blank" rel="noopener">glibc升级</a></p>
+<h2 id="收藏链接"><a href="#收藏链接" class="headerlink" title="收藏链接"></a>收藏链接</h2><p><a href="http://www.cnblogs.com/jyaray/archive/2011/04/30/2033362.html" target="_blank" rel="noopener">tar压缩解压缩命令详解</a></p>
+<p><a href="https://cnodejs.org/topic/56dc21f1502596633dc2c3dc" target="_blank" rel="noopener">glibc升级</a></p>
 <p><a href="https://www.cnblogs.com/moonandstar08/p/7282203.html" target="_blank" rel="noopener">Linux日期时间显示输出</a></p>
 <p><a href="http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html" target="_blank" rel="noopener">crontab定时任务</a></p>
 <p><a href="http://linuxtools-rst.readthedocs.io/zh_CN/latest/index.html" target="_blank" rel="noopener"><strong>Linux工具参考</strong></a>(推荐)</p>
@@ -170,6 +179,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2018/02/01/CSS动画-1/" title="CSS动画（一）：基础">
+  <strong>上一篇：</strong><br/>
+  <span>
+  CSS动画（一）：基础</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2018/01/15/apache配置/"  title="apache配置">
@@ -218,11 +235,11 @@
 			
 		
 			
-				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
+				<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
+				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
 			
 		
 			
@@ -230,19 +247,23 @@
 			
 		
 			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
+				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
 			
 		
 			
@@ -254,7 +275,7 @@
 			
 		
 			
-				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+				<li><a href="/tags/antd/" title="antd">antd<sup>1</sup></a></li>
 			
 		
 			
@@ -262,11 +283,7 @@
 			
 		
 			
-				<li><a href="/tags/antd/" title="antd">antd<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
 			
 		
 			
@@ -274,11 +291,11 @@
 			
 		
 			
-				<li><a href="/tags/https/" title="https">https<sup>1</sup></a></li>
+				<li><a href="/tags/apache/" title="apache">apache<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
+				<li><a href="/tags/https/" title="https">https<sup>1</sup></a></li>
 			
 		
 		</ul>

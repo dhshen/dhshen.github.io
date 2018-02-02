@@ -1,0 +1,526 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>CSS动画（一）：基础 | 向上爬的蜗牛</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="dhshen">
+    
+
+    
+    <meta name="description" content="与动画相关的CSS属性有： 123animationtransitiontransform animationanimation属性是一个简写属性，用于设置6个动画属性： 123456animation-name: none | keyframesname				/* keyframe名称 */animation-duration: 								/* 完成动画花费的时间 */animation">
+<meta name="keywords" content="动画">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS动画（一）：基础">
+<meta property="og:url" content="https://dhshen.github.io/2018/02/01/CSS动画-1/index.html">
+<meta property="og:site_name" content="向上爬的蜗牛">
+<meta property="og:description" content="与动画相关的CSS属性有： 123animationtransitiontransform animationanimation属性是一个简写属性，用于设置6个动画属性： 123456animation-name: none | keyframesname				/* keyframe名称 */animation-duration: 								/* 完成动画花费的时间 */animation">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-02-02T06:24:10.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS动画（一）：基础">
+<meta name="twitter:description" content="与动画相关的CSS属性有： 123animationtransitiontransform animationanimation属性是一个简写属性，用于设置6个动画属性： 123456animation-name: none | keyframesname				/* keyframe名称 */animation-duration: 								/* 完成动画花费的时间 */animation">
+
+    
+    <link rel="alternative" href="/atom.xml" title="向上爬的蜗牛" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="向上爬的蜗牛">向上爬的蜗牛</a></h1>
+				<h2 class="blog-motto">记录搬砖路上的点点滴滴</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:dhshen.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/02/01/CSS动画-1/" title="CSS动画（一）：基础" itemprop="url">CSS动画（一）：基础</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="dhshen" target="_blank" itemprop="author">dhshen</a>
+		
+  <p class="article-time">
+    <time datetime="2018-02-01T12:39:22.000Z" itemprop="datePublished"> 发表于 2018-02-01</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>与动画相关的CSS属性有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">animation</span><br><span class="line">transition</span><br><span class="line">transform</span><br></pre></td></tr></table></figure>
+<h2 id="animation"><a href="#animation" class="headerlink" title="animation"></a>animation</h2><p>animation属性是一个简写属性，用于设置6个动画属性：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">animation-name: none | keyframesname				/* keyframe名称 */</span><br><span class="line"><span class="selector-tag">animation-duration</span>: 								<span class="comment">/* 完成动画花费的时间 */</span></span><br><span class="line"><span class="selector-tag">animation-timing-function</span>: 							<span class="comment">/* 自定义动画速度曲线 */</span></span><br><span class="line"><span class="selector-tag">animation-delay</span>: 									<span class="comment">/* 动画开始之前的延迟 */</span></span><br><span class="line">animation-iteration-count: n | infinite				/* 规定动画应该播放的次数 */</span><br><span class="line">animation-direction: normal | alternate            	/* 否|是，规定是否应该轮流反向播放动画 */</span><br></pre></td></tr></table></figure>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">animation: name duration timing-function delay iteration-count direction;</span><br></pre></td></tr></table></figure>
+<p>注意：animation-duration属性默认为0，如果不设置值动画就不会播放了。</p>
+<p><strong>animation-timing-function</strong></p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear</td>
+<td>动画从头到尾的速度是相同的</td>
+</tr>
+<tr>
+<td>ease</td>
+<td>默认。低速开始，然后加快，在结束前变慢</td>
+</tr>
+<tr>
+<td>ease-in</td>
+<td>加速，动画以低速开始</td>
+</tr>
+<tr>
+<td>ease-out</td>
+<td>减速，动画以低速结束</td>
+</tr>
+<tr>
+<td>ease-in-out</td>
+<td>动画以低速开始和结束</td>
+</tr>
+<tr>
+<td>cubic-bezier(n,n,n,n)</td>
+<td>cubic-bezier的值可以在<a href="http://cubic-bezier.com/" target="_blank" rel="noopener">cubic-bezier.com/</a>定制</td>
+</tr>
+</tbody>
+</table>
+<p>Javascript操作：<code>style.驼峰命名</code>，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">object.style.animationName=<span class="string">"mymove"</span></span><br><span class="line">object.style.animationDuration = <span class="string">"3s"</span></span><br><span class="line">object.style.animationTimingFunction = <span class="string">"linear"</span></span><br></pre></td></tr></table></figure>
+<p>兼容的写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-webkit-</span><br></pre></td></tr></table></figure>
+<p><strong>keyframe</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@keyframes 动画名&#123;</span><br><span class="line">  0% &#123;&#125;</span><br><span class="line">  50% &#123;&#125;</span><br><span class="line">  100% &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h2><p>transition属性是一个简写属性，用于设置4个过渡属性：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">transition-property</span>:			<span class="comment">/* 规定设置过渡效果的CSS属性的名称 */</span></span><br><span class="line"><span class="selector-tag">transition-duration</span>:</span><br><span class="line"><span class="selector-tag">transition-timing-function</span>:</span><br><span class="line"><span class="selector-tag">transition-delay</span>:</span><br></pre></td></tr></table></figure>
+<p>语法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">property</span> <span class="selector-tag">duration</span> <span class="selector-tag">timing-function</span> <span class="selector-tag">delay</span>;	<span class="comment">/* 默认值：all 0 ease 0 */</span></span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">transition:width 2s, height 2s, background-color 2s, transform 2s;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<p>1.不是所有的CSS属性都支持transition，查看<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_animated_properties" target="_blank" rel="noopener">哪些CSS属性可以动画</a>，查看具体的<a href="http://leaverou.github.io/animatable/" target="_blank" rel="noopener">效果</a></p>
+<p>局限性：</p>
+<p>1.一次性，不能重复触发</p>
+<p>2.只能定义开始状态和结束状态，不能定义中间状态</p>
+<h2 id="transform"><a href="#transform" class="headerlink" title="transform"></a>transform</h2><p>使用它元素可以被<strong>转换(translate)、旋转(rotate)、缩放(scale)、倾斜(skew)</strong>。</p>
+<p>只对block级元素生效</p>
+<p><strong>transform-functions:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">translate</span><br><span class="line">translate3d</span><br><span class="line">translateX</span><br><span class="line">translateY</span><br><span class="line">translateZ</span><br></pre></td></tr></table></figure>
+<p>缩放</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scale</span><br><span class="line">scale3d</span><br><span class="line">scaleX</span><br><span class="line">scaleY</span><br><span class="line">scaleZ</span><br></pre></td></tr></table></figure>
+<p>旋转</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rotate</span><br><span class="line">rotate3d</span><br><span class="line">rotateX</span><br><span class="line">rotateY</span><br><span class="line">rotateZ</span><br></pre></td></tr></table></figure>
+<p>倾斜</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">skew</span><br><span class="line">skewX</span><br><span class="line">skewY</span><br></pre></td></tr></table></figure>
+<p>其它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">matrix</span><br><span class="line">matrix3d</span><br><span class="line">perspective(n)</span><br></pre></td></tr></table></figure>
+<h2 id="transform-origin"><a href="#transform-origin" class="headerlink" title="transform-origin"></a>transform-origin</h2><p>transform-origin属性让你更改一个元素变形的原点。例如rotate()的transform-origin是旋转的中心点。</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><a href="http://www.ruanyifeng.com/blog/2014/02/css_transition_and_animation.html" target="_blank" rel="noopener">阮一峰-CSS动画简介</a></p>
+<p><a href="http://www.imooc.com/article/7687" target="_blank" rel="noopener">CSS3动画开发指南之逐帧动画</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/动画/">动画</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="https://dhshen.github.io/2018/02/01/CSS动画-1/" data-title="CSS动画（一）：基础 | 向上爬的蜗牛" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2018/01/24/Linux运维常用命令/"  title="Linux运维常用命令">
+ <strong>下一篇：</strong><br/> 
+ <span>Linux运维常用命令
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/css/" title="css">css<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/charles/" title="charles">charles<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/运维/" title="运维">运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/antd/" title="antd">antd<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/apache/" title="apache">apache<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/https/" title="https">https<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="dhshen">dhshen</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
