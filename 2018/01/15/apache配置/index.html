@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="向上爬的蜗牛">
 <meta property="og:description" content="什么是shtml简单的说，*.shtml文件就是html文件加个ssi。 SSI：Server Side Include SSI机制是动态包含，而不是静态生成，是由web服务器比如appache在收到用户的请求时，如果解析到其中有SSI包含指令时，自动去除被包含的页面嵌入到被请求的页面中一起当做一个整体的页面发送给用户，对用户来说根本不知道服务器做了啥，只是知道得到了一个完整的页面。 应用它可以把">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-26T02:26:36.359Z">
+<meta property="og:updated_time" content="2018-04-09T03:05:10.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="apache配置">
 <meta name="twitter:description" content="什么是shtml简单的说，*.shtml文件就是html文件加个ssi。 SSI：Server Side Include SSI机制是动态包含，而不是静态生成，是由web服务器比如appache在收到用户的请求时，如果解析到其中有SSI包含指令时，自动去除被包含的页面嵌入到被请求的页面中一起当做一个整体的页面发送给用户，对用户来说根本不知道服务器做了啥，只是知道得到了一个完整的页面。 应用它可以把">
@@ -110,14 +110,28 @@
 <p>3.在虚拟主机配置中添加<code>Options Indexes FollowSymLinks IncludesNOEXEC</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerName www.example.com</span><br><span class="line">    DocumentRoot /Users/example/workspace/</span><br><span class="line">    &lt;Directory /Users/example/workspace/&gt;</span><br><span class="line">    	Options Indexes FollowSymLinks IncludesNOEXEC</span><br><span class="line">        AllowOverride All</span><br><span class="line">        Allow from all</span><br><span class="line">        Require all granted</span><br><span class="line">    &lt;/Directory&gt;</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
 <p>4.重启apache服务器</p>
-<h2 id="htaccess文件"><a href="#htaccess文件" class="headerlink" title=".htaccess文件"></a>.htaccess文件</h2><p>##遇到的问题</p>
+<h2 id="htaccess文件"><a href="#htaccess文件" class="headerlink" title=".htaccess文件"></a>.htaccess文件</h2><p>.htaccess是一个针对目录的配置，当你把它放到项目的根目录下，那么它就对整个项目有效果，如果放到一个单独的子目录下，那么它就只对这个子目录有效果。</p>
+<p>直接修改apache配置文件是需要重启apache服务器的，.htaccess文件却不需要，它可以看做是配置文件的补充。</p>
+<p><strong>如何生效：</strong></p>
+<p>.htaccess文件是否生效与<code>AllowOverride All</code>这个配置有关。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AllowOverride All	<span class="comment">#表示生效</span></span><br><span class="line">AllowOverride None	<span class="comment">#表示禁止使用</span></span><br></pre></td></tr></table></figure>
+<p>.htaccess文件的语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory &quot;/xxx/xxx/xxx/&quot;&gt;</span><br><span class="line">    Options Indexes FollowSymLinks</span><br><span class="line">    AllowOverride All</span><br><span class="line">    Order Allow,Deny</span><br><span class="line">    Allow from all</span><br><span class="line">    RewriteEngine on</span><br><span class="line">    RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line">    RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line">    RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>apache配置的\<directory>里的配置都可以搬到.htaccess文件中去，且效果一样。</directory></p>
+<p><strong>如果上述操作不生效呢？</strong></p>
+<p>那就是httpd.conf文件中有一个配置没有打开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoadModule rewrite_module modules/mod_rewrite.so</span><br></pre></td></tr></table></figure>
+<p>打开这一行的注释就OK了，所以htaccess文件的生效是关两个配置的。</p>
+<p>##遇到的问题</p>
 <p><strong>解决VirtualHost只有一个有效</strong></p>
 <p>设置了多个<code>VirtualHost</code>，只有第一个起作用，只需要在设置<code>VirtualHost</code>的上面加入一行就可以了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NamevirtualHost *:80</span><br></pre></td></tr></table></figure>
 <p><strong>service httpd restart失败，提示80端口被占用</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看进程ID</span></span><br><span class="line">ps aux|grep httpd</span><br><span class="line"><span class="comment"># 杀进程</span></span><br><span class="line"><span class="built_in">kill</span> -9 PID</span><br></pre></td></tr></table></figure>
+<h2 id="Options指令"><a href="#Options指令" class="headerlink" title="Options指令"></a>Options指令</h2><p>请参考：<a href="http://www.365mini.com/page/apache-options-directive.htm" target="_blank" rel="noopener">Apache Options指令详解</a></p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.cnblogs.com/zichi/p/5111159.html" target="_blank" rel="noopener">.html 、.htm 、 .shtml 以及 .shtm 四种扩展名的文件区别</a></p>
 <p><a href="http://www.cnblogs.com/zichi/p/4889075.html" target="_blank" rel="noopener">Apache下开启SSI配置使html支持include包含</a></p>
+<p><a href="https://zybuluo.com/phper/note/73726" target="_blank" rel="noopener">apache的虚拟域名rewrite配置以及.htaccess的使用</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -200,11 +214,11 @@
 			
 		
 			
-				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
 			
 		
 			
@@ -216,19 +230,11 @@
 			
 		
 			
-				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
 			
 		
 			
@@ -240,19 +246,27 @@
 			
 		
 			
-				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/antd/" title="antd">antd<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/emoji/" title="emoji">emoji<sup>1</sup></a></li>
 			
 		
 			

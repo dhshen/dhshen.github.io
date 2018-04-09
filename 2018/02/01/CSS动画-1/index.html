@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="向上爬的蜗牛">
 <meta property="og:description" content="与动画相关的CSS属性有： 123animationtransitiontransform animationanimation属性是一个简写属性，用于设置6个动画属性： 123456animation-name: none | keyframesname				/* keyframe名称 */animation-duration: 								/* 完成动画花费的时间 */animation">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-02T06:24:10.674Z">
+<meta property="og:updated_time" content="2018-02-02T07:32:37.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS动画（一）：基础">
 <meta name="twitter:description" content="与动画相关的CSS属性有： 123animationtransitiontransform animationanimation属性是一个简写属性，用于设置6个动画属性： 123456animation-name: none | keyframesname				/* keyframe名称 */animation-duration: 								/* 完成动画花费的时间 */animation">
@@ -142,7 +142,7 @@
 <p>语法：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">transition</span>: <span class="selector-tag">property</span> <span class="selector-tag">duration</span> <span class="selector-tag">timing-function</span> <span class="selector-tag">delay</span>;	<span class="comment">/* 默认值：all 0 ease 0 */</span></span><br></pre></td></tr></table></figure>
 <p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">transition:width 2s, height 2s, background-color 2s, transform 2s;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition:width 2s, height 2s, background-color 2s, transform 2s;</span><br></pre></td></tr></table></figure>
 <p>注意：</p>
 <p>1.不是所有的CSS属性都支持transition，查看<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_animated_properties" target="_blank" rel="noopener">哪些CSS属性可以动画</a>，查看具体的<a href="http://leaverou.github.io/animatable/" target="_blank" rel="noopener">效果</a></p>
 <p>局限性：</p>
@@ -161,8 +161,12 @@
 <p>其它：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">matrix</span><br><span class="line">matrix3d</span><br><span class="line">perspective(n)</span><br></pre></td></tr></table></figure>
 <h2 id="transform-origin"><a href="#transform-origin" class="headerlink" title="transform-origin"></a>transform-origin</h2><p>transform-origin属性让你更改一个元素变形的原点。例如rotate()的transform-origin是旋转的中心点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transform-origin: x-axis y-axis z-axis;</span><br></pre></td></tr></table></figure>
+<p>可能的取值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x-axis: 定义视图被置于X轴的何处。可能的值：left/center/right | length | %</span><br><span class="line">y-axis: 定义视图被置于Y轴的何处。可能的值：top/center/bottom | length | %</span><br><span class="line">z-axis: 定义视图被置于Z轴的何处。可能的值：length</span><br></pre></td></tr></table></figure>
+<p>默认值为：<code>50% 50% 0</code></p>
 <h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><a href="http://www.ruanyifeng.com/blog/2014/02/css_transition_and_animation.html" target="_blank" rel="noopener">阮一峰-CSS动画简介</a></p>
-<p><a href="http://www.imooc.com/article/7687" target="_blank" rel="noopener">CSS3动画开发指南之逐帧动画</a></p>
+<p>## </p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -193,6 +197,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2018/02/02/CSS动画-2/" title="CSS动画-2">
+  <strong>上一篇：</strong><br/>
+  <span>
+  CSS动画-2</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2018/01/24/Linux运维常用命令/"  title="Linux运维常用命令">
@@ -237,11 +249,11 @@
 			
 		
 			
-				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
+				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/动画/" title="动画">动画<sup>1</sup></a></li>
+				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
 			
 		
 			
@@ -253,19 +265,11 @@
 			
 		
 			
-				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+				<li><a href="/tags/ES6/" title="ES6">ES6<sup>1</sup></a></li>
 			
 		
 			
@@ -277,19 +281,27 @@
 			
 		
 			
-				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/antd/" title="antd">antd<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/emoji/" title="emoji">emoji<sup>1</sup></a></li>
 			
 		
 			
