@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="向上爬的蜗牛">
 <meta property="og:description" content="什么是shtml简单的说，*.shtml文件就是html文件加个ssi。 SSI：Server Side Include SSI机制是动态包含，而不是静态生成，是由web服务器比如appache在收到用户的请求时，如果解析到其中有SSI包含指令时，自动去除被包含的页面嵌入到被请求的页面中一起当做一个整体的页面发送给用户，对用户来说根本不知道服务器做了啥，只是知道得到了一个完整的页面。 应用它可以把">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-09T03:05:10.581Z">
+<meta property="og:updated_time" content="2018-07-25T03:56:56.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="apache配置">
 <meta name="twitter:description" content="什么是shtml简单的说，*.shtml文件就是html文件加个ssi。 SSI：Server Side Include SSI机制是动态包含，而不是静态生成，是由web服务器比如appache在收到用户的请求时，如果解析到其中有SSI包含指令时，自动去除被包含的页面嵌入到被请求的页面中一起当做一个整体的页面发送给用户，对用户来说根本不知道服务器做了啥，只是知道得到了一个完整的页面。 应用它可以把">
@@ -129,6 +129,7 @@
 <p><strong>service httpd restart失败，提示80端口被占用</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看进程ID</span></span><br><span class="line">ps aux|grep httpd</span><br><span class="line"><span class="comment"># 杀进程</span></span><br><span class="line"><span class="built_in">kill</span> -9 PID</span><br></pre></td></tr></table></figure>
 <h2 id="Options指令"><a href="#Options指令" class="headerlink" title="Options指令"></a>Options指令</h2><p>请参考：<a href="http://www.365mini.com/page/apache-options-directive.htm" target="_blank" rel="noopener">Apache Options指令详解</a></p>
+<h2 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerAdmin 管理员邮件地址</span><br><span class="line">    ServerName 域名</span><br><span class="line">    ProxyPass / http://localhost:8888/</span><br><span class="line">    ProxyPassReverse / http://localhost:8888/</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.cnblogs.com/zichi/p/5111159.html" target="_blank" rel="noopener">.html 、.htm 、 .shtml 以及 .shtm 四种扩展名的文件区别</a></p>
 <p><a href="http://www.cnblogs.com/zichi/p/4889075.html" target="_blank" rel="noopener">Apache下开启SSI配置使html支持include包含</a></p>
 <p><a href="https://zybuluo.com/phper/note/73726" target="_blank" rel="noopener">apache的虚拟域名rewrite配置以及.htaccess的使用</a></p>
@@ -214,23 +215,19 @@
 			
 		
 			
-				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/Git/" title="Git">Git<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
+				<li><a href="/tags/动画/" title="动画">动画<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/emoji/" title="emoji">emoji<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/charles/" title="charles">charles<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
 			
 		
 			
@@ -242,23 +239,7 @@
 			
 		
 			
-				<li><a href="/tags/运维/" title="运维">运维<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/svg/" title="svg">svg<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Nginx/" title="Nginx">Nginx<sup>1</sup></a></li>
+				<li><a href="/tags/npm/" title="npm">npm<sup>1</sup></a></li>
 			
 		
 			
@@ -266,11 +247,19 @@
 			
 		
 			
-				<li><a href="/tags/emoji/" title="emoji">emoji<sup>1</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+				<li><a href="/tags/运维/" title="运维">运维<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/antd/" title="antd">antd<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
 			
 		
 			
@@ -278,7 +267,19 @@
 			
 		
 			
+				<li><a href="/tags/php/" title="php">php<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/http2/" title="http2">http2<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/https/" title="https">https<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JS/" title="JS">JS<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -307,7 +308,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
 		
 		<a href="/about" target="_blank" title="dhshen">dhshen</a>
 		
