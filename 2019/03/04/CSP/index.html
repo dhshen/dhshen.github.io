@@ -4,24 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>yarn的使用 | 向上爬的蜗牛</title>
+    <title>内容安全策略CSP | 向上爬的蜗牛</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="dhshen">
     
 
     
-    <meta name="description" content="测试yarn是否安装1yarn --version 开始新项目1yarn init 添加包依赖123yarn add [package]yarn add [package]@[version]yarn add [package]@[tag] 分别添加到 devDependencies、peerDependencies 和 optionalDependencies： 123yarn add [pac">
+    <meta name="description" content="内容安全策略CSP简介CSP（Content Security Policy）内容安全策略。 CSP的实质是白名单机制，明确告诉浏览器，哪些外部资源可以加载和执行。 CSP的主要目标是减少和报告XSS攻击。（注意：并不是防止或避免） CSP配置实施CSP可以在服务器端以添加HTTP头的方式或在网页的meta标签中设置的方式来实施。 CSP的配置有两条，分别是： Content-Security-P">
+<meta name="keywords" content="网络安全">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yarn的使用">
-<meta property="og:url" content="https://dhshen.github.io/2017/08/05/yarn的使用/index.html">
+<meta property="og:title" content="内容安全策略CSP">
+<meta property="og:url" content="https://dhshen.github.io/2019/03/04/CSP/index.html">
 <meta property="og:site_name" content="向上爬的蜗牛">
-<meta property="og:description" content="测试yarn是否安装1yarn --version 开始新项目1yarn init 添加包依赖123yarn add [package]yarn add [package]@[version]yarn add [package]@[tag] 分别添加到 devDependencies、peerDependencies 和 optionalDependencies： 123yarn add [pac">
+<meta property="og:description" content="内容安全策略CSP简介CSP（Content Security Policy）内容安全策略。 CSP的实质是白名单机制，明确告诉浏览器，哪些外部资源可以加载和执行。 CSP的主要目标是减少和报告XSS攻击。（注意：并不是防止或避免） CSP配置实施CSP可以在服务器端以添加HTTP头的方式或在网页的meta标签中设置的方式来实施。 CSP的配置有两条，分别是： Content-Security-P">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-01-15T11:51:16.733Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/05/5c7e2cfb48890.jpg">
+<meta property="og:updated_time" content="2019-03-06T07:53:49.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yarn的使用">
-<meta name="twitter:description" content="测试yarn是否安装1yarn --version 开始新项目1yarn init 添加包依赖123yarn add [package]yarn add [package]@[version]yarn add [package]@[tag] 分别添加到 devDependencies、peerDependencies 和 optionalDependencies： 123yarn add [pac">
+<meta name="twitter:title" content="内容安全策略CSP">
+<meta name="twitter:description" content="内容安全策略CSP简介CSP（Content Security Policy）内容安全策略。 CSP的实质是白名单机制，明确告诉浏览器，哪些外部资源可以加载和执行。 CSP的主要目标是减少和报告XSS攻击。（注意：并不是防止或避免） CSP配置实施CSP可以在服务器端以添加HTTP头的方式或在网页的meta标签中设置的方式来实施。 CSP的配置有两条，分别是： Content-Security-P">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/05/5c7e2cfb48890.jpg">
 
     
     <link rel="alternative" href="/atom.xml" title="向上爬的蜗牛" type="application/atom+xml">
@@ -75,34 +78,52 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/08/05/yarn的使用/" title="yarn的使用" itemprop="url">yarn的使用</a>
+      <a href="/2019/03/04/CSP/" title="内容安全策略CSP" itemprop="url">内容安全策略CSP</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="dhshen" target="_blank" itemprop="author">dhshen</a>
 		
   <p class="article-time">
-    <time datetime="2017-08-05T00:14:18.000Z" itemprop="datePublished"> 发表于 2017-08-05</time>
+    <time datetime="2019-03-04T06:44:41.000Z" itemprop="datePublished"> 发表于 2019-03-04</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h3 id="测试yarn是否安装"><a href="#测试yarn是否安装" class="headerlink" title="测试yarn是否安装"></a>测试yarn是否安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn --version</span><br></pre></td></tr></table></figure>
-<h3 id="开始新项目"><a href="#开始新项目" class="headerlink" title="开始新项目"></a>开始新项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn init</span><br></pre></td></tr></table></figure>
-<h3 id="添加包依赖"><a href="#添加包依赖" class="headerlink" title="添加包依赖"></a>添加包依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add [package]</span><br><span class="line">yarn add [package]@[version]</span><br><span class="line">yarn add [package]@[tag]</span><br></pre></td></tr></table></figure>
-<p>分别添加到 <code>devDependencies</code>、<code>peerDependencies</code> 和 <code>optionalDependencies</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add [package] --dev</span><br><span class="line">yarn add [package] --peer </span><br><span class="line">yarn add [package] --optional</span><br></pre></td></tr></table></figure>
-<h3 id="升级依赖包"><a href="#升级依赖包" class="headerlink" title="升级依赖包"></a>升级依赖包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn upgrade [package]</span><br><span class="line">yarn upgrade [package]@[version]</span><br><span class="line">yarn upgrade [package]@[tag]</span><br></pre></td></tr></table></figure>
-<h3 id="移除依赖包"><a href="#移除依赖包" class="headerlink" title="移除依赖包"></a>移除依赖包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn remove [package]</span><br></pre></td></tr></table></figure>
-<h3 id="安装项目的全部依赖"><a href="#安装项目的全部依赖" class="headerlink" title="安装项目的全部依赖"></a>安装项目的全部依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn</span><br></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn install</span><br></pre></td></tr></table></figure>
+		<h1 id="内容安全策略CSP"><a href="#内容安全策略CSP" class="headerlink" title="内容安全策略CSP"></a>内容安全策略CSP</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>CSP（Content Security Policy）内容安全策略。</p>
+<p>CSP的实质是白名单机制，明确告诉浏览器，哪些外部资源可以加载和执行。</p>
+<p>CSP的主要目标是<strong>减少</strong>和<strong>报告</strong>XSS攻击。<em>（注意：并不是防止或避免）</em></p>
+<h2 id="CSP配置实施"><a href="#CSP配置实施" class="headerlink" title="CSP配置实施"></a>CSP配置实施</h2><p>CSP可以在服务器端以添加<code>HTTP头</code>的方式或在网页的<code>meta</code>标签中设置的方式来实施。</p>
+<p>CSP的配置有两条，分别是：</p>
+<p><code>Content-Security-Policy</code>：不符合CSP的外部资源会被阻止加载。</p>
+<p><code>Content-Security-Policy-Report-Only</code>：不执行限制选项，只是记录违反限制的行为。它必须与report-uri选项配合使用，其他规则与<code>Content-Security-Policy</code>相同。</p>
+<h4 id="在服务器端配置CSP-nginx"><a href="#在服务器端配置CSP-nginx" class="headerlink" title="在服务器端配置CSP[nginx]"></a>在服务器端配置CSP[nginx]</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">add_header</span>  Content-Security-Policy  <span class="string">"default-src 'self'"</span></span><br></pre></td></tr></table></figure>
+<p>如果访问了不在白名单内的资源，Chrome浏览器会报如下错误：</p>
+<p><img src="https://i.loli.net/2019/03/05/5c7e2cfb48890.jpg" alt=""></p>
+<h4 id="在HTML中的meta标签中设置"><a href="#在HTML中的meta标签中设置" class="headerlink" title="在HTML中的meta标签中设置"></a>在HTML中的meta标签中设置</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Security-Policy"</span> <span class="attr">content</span>=<span class="string">"script-src 'self'; object-src 'none'; style-src cdn.example.org third-party.org; child-src https:"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="违例报告"><a href="#违例报告" class="headerlink" title="违例报告"></a>违例报告</h4><p>指定<code>report-uri</code>策略指令，提供接收上报的URI地址，示例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: default-src 'self'; report-uri http://report.example.com/report.cgi</span><br></pre></td></tr></table></figure>
+<p>浏览器将以<code>POST请求</code>的方式上报违例信息：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"csp-report"</span>: &#123;</span><br><span class="line">    <span class="attr">"document-uri"</span>: <span class="string">"http://example.com/signup.html"</span>,</span><br><span class="line">    <span class="attr">"referrer"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="attr">"blocked-uri"</span>: <span class="string">"http://example.com/css/style.css"</span>,</span><br><span class="line">    <span class="attr">"violated-directive"</span>: <span class="string">"style-src cdn.example.com"</span>,</span><br><span class="line">    <span class="attr">"original-policy"</span>: <span class="string">"default-src 'none'; style-src cdn.example.com; report-uri /_/csp-reports"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="示例配置"><a href="#示例配置" class="headerlink" title="示例配置"></a>示例配置</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: script-src *.example.com *.test.com;</span><br></pre></td></tr></table></figure>
+<p>只允许加载example.com和test.com子域下的js文件。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">add_header</span>  Content-Security-Policy  <span class="string">"default-src 'self'"</span></span><br></pre></td></tr></table></figure>
+<p>所有的资源都只允许从当前页面所属的域名加载。</p>
+<h4 id="常见指令"><a href="#常见指令" class="headerlink" title="常见指令"></a>常见指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">script-src: 限制JavaScript源。最常用。</span><br><span class="line">font-src: 限制通过@font-face加载的字体源</span><br><span class="line">frame-src: 限制通过类似&lt;frame&gt;和&lt;iframe&gt;标签加载的内嵌内容源</span><br><span class="line">img-src: 限制图片和图标源</span><br><span class="line">media-src: 限制通过&lt;audio&gt;或&lt;video&gt;标签加载的媒体文件源</span><br></pre></td></tr></table></figure>
+<h2 id="浏览器兼容"><a href="#浏览器兼容" class="headerlink" title="浏览器兼容"></a>浏览器兼容</h2><p>可以从<a href="https://content-security-policy.com/" target="_blank" rel="noopener">Content Security Policy Reference</a>查看浏览器的兼容情况。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CSP" target="_blank" rel="noopener">内容安全策略( CSP )</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2016/09/csp.html" target="_blank" rel="noopener">Content Security Policy 入门教程—阮一峰</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/网络安全/">网络安全</a>
+  </div>
 
 </div>
 
@@ -110,7 +131,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://dhshen.github.io/2017/08/05/yarn的使用/" data-title="yarn的使用 | 向上爬的蜗牛" data-tsina="undefined" class="share clearfix">
+	  <div data-url="https://dhshen.github.io/2019/03/04/CSP/" data-title="内容安全策略CSP | 向上爬的蜗牛" data-tsina="undefined" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -123,19 +144,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/08/06/react-redux的用法/" title="react-redux的用法">
-  <strong>上一篇：</strong><br/>
-  <span>
-  react-redux的用法</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/07/27/《高性能网站建设指南》/"  title="《高性能网站建设指南》">
+<a href="/2018/04/09/将emoji转换成码点/"  title="将emoji转换成码点">
  <strong>下一篇：</strong><br/> 
- <span>《高性能网站建设指南》
+ <span>将emoji转换成码点
 </span>
 </a>
 </div>
